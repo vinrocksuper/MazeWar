@@ -13,7 +13,7 @@ int endY;
 
 // Returns string of team members name
 __declspec(dllexport) char* GetTeam() {
-	return (char*)"Vincent Li";
+	return (char*)"Vincent Li and Duy Vu";
 }
 
 // Sets maze data from main into the dll. Save into a variable in the DLL. Use this for GetData function.
@@ -34,7 +34,7 @@ __declspec(dllexport) int** GetMaze(int& width, int& height) {
 
 // returns next x/y pos to move to. 
 __declspec(dllexport) void GetNextPosition(int& xpos, int& ypos) {
-
+	int Coordinates[5][2]; 
 }
 
 // sets starting location for player. Saves the x and y values for starting pos
@@ -50,6 +50,10 @@ __declspec(dllexport) void GetStart(int& xpos, int& ypos) {
 		xpos = startX;
 		ypos = startY;
 	}
+	else {
+		xpos = -1;
+		ypos = -1;
+	}
 }
 
 // Sets end pos for player. saves x and y location
@@ -64,5 +68,9 @@ __declspec(dllexport) void GetEnd(int& xpos, int& ypos) {
 	if (endSet) {
 		xpos = endX;
 		ypos = endY;
+	}
+	else {
+		xpos = -1;
+		ypos = -1;
 	}
 }
