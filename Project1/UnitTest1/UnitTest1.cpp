@@ -4,12 +4,12 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-__declspec(dllexport) char* GetTeam();
-__declspec(dllexport) void SetStart(int xpos, int ypos);
-__declspec(dllexport) void SetEnd(int xpos, int ypos);
-__declspec(dllexport) void GetStart(int& xpos, int& ypos);
-__declspec(dllexport) void GetEnd(int& xpos, int& ypos);
-__declspec(dllexport) int** GetMaze(int& width, int& height);
+__declspec(dllimport) char* GetTeam();
+__declspec(dllimport) void SetStart(int xpos, int ypos);
+__declspec(dllimport) void SetEnd(int xpos, int ypos);
+__declspec(dllimport) void GetStart(int& xpos, int& ypos);
+__declspec(dllimport) void GetEnd(int& xpos, int& ypos);
+__declspec(dllimport) int** GetMaze(int& width, int& height);
 
 namespace UnitTest1
 {
@@ -53,7 +53,6 @@ namespace UnitTest1
 				Assert::Fail(L"get start threw exception");
 			}
 		}
-
 		TEST_METHOD(TestGetEnd)
 		{
 			int x = 3;
