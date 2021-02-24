@@ -18,7 +18,7 @@ __declspec(dllexport) char* GetTeam() {
 
 // Sets maze data from main into the dll. Save into a variable in the DLL. Use this for GetData function.
 __declspec(dllexport) void SetMaze(const int** data, int width, int height) {
-	
+	/*
 	pMazeData = new int* [height];
 	for (size_t i = 0; i < height; i++)
 	{
@@ -26,13 +26,14 @@ __declspec(dllexport) void SetMaze(const int** data, int width, int height) {
 	}
 	mazeWidth = width;
 	mazeHeight = height;
+	*/
 }
 
 // Gets maze data that was passed in using SetMaze function and the width/height using set arguments
 __declspec(dllexport) int** GetMaze(int& width, int& height) {
 	width = mazeWidth;
 	height = mazeHeight;
-	return mazeData;
+	return pMazeData;
 }
 
 // returns next x/y pos to move to. 
