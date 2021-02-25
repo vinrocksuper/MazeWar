@@ -115,6 +115,7 @@ namespace UnitTest1
 			delete[] testMazePointer;
 
 		}
+		// Incomplete
 		TEST_METHOD(TestNextPosition) 
 		{
 			int** testMaze = new int* [10];
