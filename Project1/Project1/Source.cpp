@@ -9,8 +9,9 @@ int startY;
 bool endSet = false;
 int endX;
 int endY;
-int currentX;
-int currentY;
+int xPath[] = { 0,1,2,3,4,5,6,7,8,9 };
+int yPath[] = { 10,9,8,7,6,5,4,3,2,1 };
+int step = 0;
 
 // Returns string of team members name
 __declspec(dllexport) char* GetTeam() {
@@ -20,14 +21,14 @@ __declspec(dllexport) char* GetTeam() {
 // Sets maze data from main into the dll. Save into a variable in the DLL. Use this for GetData function.
 __declspec(dllexport) void SetMaze(const int** data, int width, int height) {
 
-	pMazeData = new int* [height];
-	for (size_t i = 0; i < height; i++)
+	pMazeData = new int* [width];
+	for (size_t i = 0; i < width; i++)
 	{
-		pMazeData[i] = (int*)data[i];
+		pMazeData[i] = new int[height];
 	}
-	for (size_t i = 0; i < height; i++)
+	for (size_t i = 0; i < width; i++)
 	{
-		for (size_t j = 0; j < width; j++)
+		for (size_t j = 0; j < height; j++)
 		{
 			pMazeData[i][j] = (int)data[i][j];
 		}
@@ -46,8 +47,9 @@ __declspec(dllexport) int** GetMaze(int& width, int& height) {
 
 // returns next x/y pos to move to. 
 __declspec(dllexport) void GetNextPosition(int& xpos, int& ypos) {
-	xpos = 5;
-	ypos = 5;
+	xpos = xPath[step];
+	ypos = yPath[step];
+	step++;
 }
 
 // sets starting location for player. Saves the x and y values for starting pos

@@ -86,16 +86,23 @@ namespace UnitTest1
 		}
 		TEST_METHOD(TestSetMaze) 
 		{
-			const int** testMazePointer = new const int *[10];
+			int** testMazePointer = new int *[10];
 
 			for (size_t i = 0; i < 10; i++)
 			{
-				testMazePointer[i] = new int(1);
+				testMazePointer[i] = new int[12];
 			}
-			testMazePointer[2, 2] = new int(11);
+			for (size_t i = 0; i < 10; i++)
+			{
+				for (size_t j = 0; j < 12; j++)
+				{
+					testMazePointer[i][j] = i;
+				}
+			}
+			testMazePointer[2][2] = 11;
 
 			try {
-				SetMaze(testMazePointer, 10, 10);
+				SetMaze((const int**)testMazePointer, 10, 12);
 			}
 			catch (const std::exception&) {
 				
