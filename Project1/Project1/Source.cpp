@@ -9,7 +9,8 @@ int startY;
 bool endSet = false;
 int endX;
 int endY;
-
+int currentX;
+int currentY;
 
 // Returns string of team members name
 __declspec(dllexport) char* GetTeam() {
@@ -19,10 +20,10 @@ __declspec(dllexport) char* GetTeam() {
 // Sets maze data from main into the dll. Save into a variable in the DLL. Use this for GetData function.
 __declspec(dllexport) void SetMaze(const int** data, int width, int height) {
 
-	pMazeData = new int* [height];
-	for (size_t i = 0; i < height; i++)
+	pMazeData = new int* [height*width];
+	for (size_t i = 0; i < height*width; i++)
 	{
-		pMazeData[i] = (int*)data[width, height];
+		pMazeData[i] = (int*)data[i%width,(int)i/width];
 	}
 	mazeWidth = width;
 	mazeHeight = height;
