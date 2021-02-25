@@ -3,9 +3,46 @@
 
 #include <iostream>
 __declspec(dllimport) char* GetTeam();
+__declspec(dllimport) void SetStart(int xpos, int ypos);
+__declspec(dllimport) void SetEnd(int xpos, int ypos);
+__declspec(dllimport) void GetStart(int& xpos, int& ypos);
+__declspec(dllimport) void GetEnd(int& xpos, int& ypos);
+__declspec(dllimport) int** GetMaze(int& width, int& height);
+__declspec(dllimport) void SetMaze(const int** data, int width, int height);
+__declspec(dllimport) void GetNextPosition(int& xpos, int& ypos);
+using namespace std;
 int main()
 {
     std::cout << GetTeam();
+	/**
+	
+	int width = 10;
+	const int** testMazePointer = new const int* [width];
+
+	for (size_t i = 0; i < 10; i++)
+	{
+		testMazePointer[i] = new int(1);
+	}
+	testMazePointer[2, 2] = new int(11);
+	SetMaze(testMazePointer, width, width);
+
+	for (size_t i = 0; i < 10; i++)
+	{
+		for (size_t j = 0; j < 10; j++)
+		{
+			cout << &testMazePointer[i][j]<< i << j <<endl;
+		}
+	}
+	int** returnedMaze = GetMaze(width, width);
+	for (size_t i = 0; i < 10; i++)
+	{
+		for (size_t j = 0; j < 10; j++)
+		{
+			cout << &returnedMaze[i][j] << i << j << endl;
+		}
+	}
+	*/
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
