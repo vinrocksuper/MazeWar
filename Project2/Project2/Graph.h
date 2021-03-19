@@ -44,4 +44,6 @@ public:
 	void AssignHeuristic(Vertex* vert);
 
 	
+
+	
 };

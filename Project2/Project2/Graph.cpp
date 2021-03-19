@@ -30,16 +30,16 @@ void Graph::AssignHeuristic(Vertex* vert)
 // Else push adjacent vertex into stack
 void Graph::RemoveVertex()
 {
-	bool zeroAdj = true;
+	bool zeroAdj = true; // Assume no adjacencies left.
 	for(int i=0;i < width;i++)
 	{
 		if(adjMatrix[currentVertex->xPos][i] == 1 )
 		{
 			// push adj vertex into stack
-			zeroAdj = false;
+			zeroAdj = false; 
 		}
 	}
-	if(zeroAdj)
+	if(zeroAdj) // Since no adjacent vertex, pop it from stack.
 	{
 		vertStack.pop();
 	}
