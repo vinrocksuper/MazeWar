@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-class Vertex
+class __declspec(dllexport)  Vertex
 {
 public:
 	//Fields

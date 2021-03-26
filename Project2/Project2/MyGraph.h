@@ -6,7 +6,7 @@
 
 
 using namespace std;
-class Graph
+ class __declspec(dllexport) MyGraph
 {
 public:
 	//List of vertices in graph
@@ -26,25 +26,25 @@ public:
 	int width;
 	int height;
 	//Constructors
-	Graph(int sX, int sY, int eX, int eY, int w, int h);
+	MyGraph(int sX, int sY, int eX, int eY, int w, int h);
 
 
 	//Destructors
-	~Graph();
+	~MyGraph();
 
 	//Methods
 	
 	// Adds vertex into list of vertices
-	__declspec(dllexport) void AddVertex(Vertex* vert);
+ void AddVertex(Vertex* vert);
 
 	// If no adjacent unvisited, pop vertex.
-	__declspec(dllexport) void RemoveVertex();
+ void RemoveVertex();
 	
 	// Assigns the Heuristic value to the vertex
 	// Using Manhattan Values
-	__declspec(dllexport) void AssignHeuristic(Vertex* vert);
+void AssignHeuristic(Vertex* vert);
 
-	__declspec(dllexport) void FillAdjMatrix();
+ void FillAdjMatrix();
 
-	__declspec(dllexport) int AddEdge(Vertex* vert1, Vertex* vert2);
+static int AddEdge(Vertex* vert1, Vertex* vert2);
 };
