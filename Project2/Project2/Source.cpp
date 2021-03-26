@@ -11,8 +11,9 @@ int endX;
 int endY;
 int xPath[] = { 0,1,2,2,2,2,2,3,4,5 };
 int yPath[] = { 0,0,0,1,2,3,4,4,4,4 };
-int step = 0;
+int currentStep = 0;
 bool mazeSet = false;
+
 // Returns string of team members name
 __declspec(dllexport) char* GetTeam() {
 	return (char*)"Vincent Li and Duy Vu";
@@ -57,11 +58,11 @@ __declspec(dllexport) int** GetMaze(int& width, int& height) {
 
 // returns next x/y pos to move to. 
 __declspec(dllexport) bool GetNextPosition(int& xpos, int& ypos) {
-	if(xPath[step] && yPath[step])
+	if(xPath[currentStep] && yPath[currentStep])
 	{
-		xpos = xPath[step];
-		ypos = yPath[step];
-		step++;
+		xpos = xPath[currentStep];
+		ypos = yPath[currentStep];
+		currentStep++;
 		return true;
 	}
 	return false;
@@ -118,5 +119,6 @@ __declspec(dllexport) bool GetEnd(int& xpos, int& ypos) {
 // Brings player back to their start location and run thru the maze again
 __declspec(dllexport) bool Restart()
 {
-	
+	currentStep = 0;
+	return true;
 }

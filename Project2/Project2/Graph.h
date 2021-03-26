@@ -35,16 +35,16 @@ public:
 	//Methods
 	
 	// Adds vertex into list of vertices
-	void AddVertex(Vertex* vert);
+	__declspec(dllexport) void AddVertex(Vertex* vert);
 
 	// If no adjacent unvisited, pop vertex.
-	void RemoveVertex();
+	__declspec(dllexport) void RemoveVertex();
 	
 	// Assigns the Heuristic value to the vertex
 	// Using Manhattan Values
-	void AssignHeuristic(Vertex* vert);
+	__declspec(dllexport) void AssignHeuristic(Vertex* vert);
 
-	void FillAdjMatrix();
+	__declspec(dllexport) void FillAdjMatrix();
 
-	int AddEdge(Vertex* vert1, Vertex* vert2);
+	__declspec(dllexport) int AddEdge(Vertex* vert1, Vertex* vert2);
 };

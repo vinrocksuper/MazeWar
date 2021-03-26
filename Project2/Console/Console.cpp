@@ -13,7 +13,7 @@ __declspec(dllimport) bool GetNextPosition(int& xpos, int& ypos);
 using namespace std;
 int main()
 {
-    std::cout << GetTeam();
+    //std::cout << GetTeam();
 	/**
 	
 	int width = 10;

@@ -22,7 +22,7 @@ Graph::Graph(int sX, int sY, int eX, int eY, int w, int h)
 
 // On moving into new vertex push it to stack. Mark it as visited.
 // UNFINISHED?
-void Graph::AddVertex(Vertex* vert)
+__declspec(dllexport) void Graph::AddVertex(Vertex* vert)
 {
 	vertStack.push(vert);
 	//vert->visited = true;
@@ -30,7 +30,7 @@ void Graph::AddVertex(Vertex* vert)
 
 // Assigns heurstic value to individual vertexes
 // FINISHED
-void Graph::AssignHeuristic(Vertex* vert)
+__declspec(dllexport) void Graph::AssignHeuristic(Vertex* vert)
 {
 	vert->heuristic = (endX - vert->xPos) + (endY - vert->yPos);
 }
@@ -38,7 +38,7 @@ void Graph::AssignHeuristic(Vertex* vert)
 // If no adj unvisited vertex, pop it from stack
 // Else push adjacent vertex into stack
 //UNFINISHED
-void Graph::RemoveVertex()
+__declspec(dllexport) void Graph::RemoveVertex()
 {
 	bool zeroAdj = true; // Assume no adjacencies left.
 	for(int i=0;i < width;i++)
@@ -59,7 +59,7 @@ void Graph::RemoveVertex()
 
 
 //Fills the Adjacency Matrix
-void Graph::FillAdjMatrix() 
+__declspec(dllexport) void Graph::FillAdjMatrix()
 {
 	for(int i=0;i<verticies.size();i++) // verticies is a vector rather than an arr
 										// so each "vertical" adjacency is width positions away
@@ -84,7 +84,7 @@ void Graph::FillAdjMatrix()
 }
 
 // Adds edges between the two vertexes if they are adjacent and not walls.
-int Graph::AddEdge(Vertex* vert1, Vertex* vert2)
+__declspec(dllexport) int Graph::AddEdge(Vertex* vert1, Vertex* vert2)
 {
 	if(vert1->isWall || vert2->isWall)
 	{
