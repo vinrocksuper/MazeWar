@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <list>
 #include <stack>
+#include <vector>
 #include "Vertex.h"
 
 
@@ -9,7 +10,7 @@ class Graph
 {
 public:
 	//List of vertices in graph
-	list<Vertex*> verticies; // Can use Vertex<Vertex*> (note vertex is c++ class not the vertex that we define)
+	vector<Vertex*> verticies; //
 	int** adjMatrix; //   2D Array of adjacencies
 
 	
@@ -28,8 +29,8 @@ public:
 	Graph(int sX, int sY, int eX, int eY, int w, int h);
 
 
-
-
+	//Destructors
+	~Graph();
 
 	//Methods
 	
@@ -43,7 +44,7 @@ public:
 	// Using Manhattan Values
 	void AssignHeuristic(Vertex* vert);
 
-	
+	void FillAdjMatrix();
 
-	
+	int AddEdge(Vertex* vert1, Vertex* vert2);
 };

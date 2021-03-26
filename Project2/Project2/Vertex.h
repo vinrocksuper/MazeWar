@@ -10,7 +10,7 @@ public:
 	int lowestCost;
 	bool visited; // has the vert been visited yet true:if
 	Vertex* previousVertex; // ptr to previous vert
-
+	bool isWall; // is the Vertex a wall
 	//Constructor
 	Vertex(int x, int y);
 
