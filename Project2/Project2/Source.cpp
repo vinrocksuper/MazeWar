@@ -1,5 +1,7 @@
 #include "pch.h"
 
+#include "Vertex.h"
+
 int mazeWidth;
 int mazeHeight;
 int** pMazeData;
@@ -121,4 +123,16 @@ __declspec(dllexport) bool Restart()
 {
 	currentStep = 0;
 	return true;
+}
+
+__declspec(dllexport) int AddEdge()
+{
+	Vertex* v1 = new Vertex(0, 9);
+	Vertex* v2 = new Vertex(0, 8);
+	v2->isWall = true;
+	if(v1->isWall || v2->isWall)
+	{
+		return 0;
+	}
+	return 1;
 }
