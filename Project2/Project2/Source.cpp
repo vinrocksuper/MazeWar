@@ -1,6 +1,7 @@
 #include "pch.h"
-
+#include <stdlib.h>
 #include "Vertex.h"
+#include "MyGraph.h"
 
 int mazeWidth;
 int mazeHeight;
@@ -15,10 +16,12 @@ int xPath[] = { 0,1,2,2,2,2,2,3,4,5 };
 int yPath[] = { 0,0,0,1,2,3,4,4,4,4 };
 int currentStep = 0;
 bool mazeSet = false;
+bool init = false;
+MyGraph graph;
 
 // Returns string of team members name
 __declspec(dllexport) char* GetTeam() {
-	return (char*)"Vincent Li and Duy Vu";
+	return (char*)"Vincent Li and Duy Vu and Curry Li";
 }
 
 // Sets maze data from main into the dll. Save into a variable in the DLL. Use this for GetData function.
@@ -68,6 +71,36 @@ __declspec(dllexport) bool GetNextPosition(int& xpos, int& ypos) {
 		return true;
 	}
 	return false;
+
+	if (init == false)
+	{
+		// add nodes to graph
+		for (size_t i = 0; i < mazeWidth; i++)
+		{
+			for (size_t j = 0; j < mazeHeight; j++)
+			{
+				if (pMazeData[i][j] != 1)
+				{
+					Vertex* node = new Vertex;
+					node->xPos = i;
+					node->yPos = j;
+					node->heuristic = abs((int)(endX - i)) + abs((int)(endY - j));
+					node->visited = false;
+					if (pMazeData[i][j] == 0)
+						node->weight = 1;
+					else
+						node->weight = pMazeData[i][j];
+					node->lowestCost = INT_MAX;
+					graph.AddVertex(node);
+				}
+			}
+		}
+		
+	}
+	xpos = xPath[currentStep];
+	ypos = yPath[currentStep];
+	currentStep++;
+	return true;
 }
 
 // sets starting location for player. Saves the x and y values for starting pos

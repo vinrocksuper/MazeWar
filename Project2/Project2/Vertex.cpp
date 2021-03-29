@@ -9,3 +9,8 @@ Vertex::Vertex(int x, int y)
 	visited = false;
 	
 }
+
+Vertex::Vertex()
+{
+
+}

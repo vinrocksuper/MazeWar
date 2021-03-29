@@ -27,7 +27,7 @@ public:
 	int height;
 	//Constructors
 	MyGraph(int sX, int sY, int eX, int eY, int w, int h);
-
+	MyGraph();
 
 	//Destructors
 	~MyGraph();
@@ -35,16 +35,18 @@ public:
 	//Methods
 	
 	// Adds vertex into list of vertices
- void AddVertex(Vertex* vert);
+	void AddVertex(Vertex* vert);
 
 	// If no adjacent unvisited, pop vertex.
- void RemoveVertex();
+	void RemoveVertex();
 	
 	// Assigns the Heuristic value to the vertex
 	// Using Manhattan Values
-void AssignHeuristic(Vertex* vert);
+	void AssignHeuristic(Vertex* vert);
 
- void FillAdjMatrix();
+	void FillAdjMatrix();
 
-static int AddEdge(Vertex* vert1, Vertex* vert2);
+	static int AddEdge(Vertex* vert1, Vertex* vert2);
+	void AddEdge(int vert1, int vert2);
+	int GetNodeIndex(int x, int y);
 };

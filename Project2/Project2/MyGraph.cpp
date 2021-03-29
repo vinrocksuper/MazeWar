@@ -67,10 +67,7 @@ void MyGraph::RemoveVertex()
 
 //Fills the Adjacency Matrix
 void MyGraph::FillAdjMatrix()
-{
-
-
-	
+{	
 	for(int i=0;i<verticies.size();i++) // verticies is a vector rather than an arr
 										// so each "vertical" adjacency is width positions away
 	{
