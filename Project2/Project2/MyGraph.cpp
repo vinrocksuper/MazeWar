@@ -2,7 +2,7 @@
 #include "MyGraph.h"
 
 
-MyGraph::MyGraph(int sX, int sY, int eX, int eY, int w, int h,int** mazecopy)
+MyGraph::MyGraph(int sX, int sY, int eX, int eY, int w, int h)
 {
 	startX = sX;
 	startY = sY;
@@ -10,7 +10,9 @@ MyGraph::MyGraph(int sX, int sY, int eX, int eY, int w, int h,int** mazecopy)
 	endY = eY;
 	width = w;
 	height = h;
-	maze = mazecopy;
+	maze = nullptr;	
+	currentVertex = nullptr;
+
 	
 	//Sets up adjMatrix
 	adjMatrix = new int* [width*height];
@@ -26,28 +28,35 @@ MyGraph::MyGraph(int sX, int sY, int eX, int eY, int w, int h,int** mazecopy)
 		}
 	}
 
-
-	// add nodes to graph
-	for (size_t i = 0; i < width; i++)
+	// UNRESOLVED EXTERNAL 
+	 /*
+	if(maze != nullptr)
 	{
-		for (size_t j = 0; j < height; j++)
+		// add nodes to graph
+
+		for (size_t i = 0; i < width; i++)
 		{
-			if (maze[i][j] != 1)
+			for (size_t j = 0; j < height; j++)
 			{
-				Vertex* node = new Vertex; // Possible memory leak? (if new -> then delete is necessary)
-				node->xPos = i;
-				node->yPos = j;
-				node->heuristic = abs((int)(endX - i)) + abs((int)(endY - j));
-				node->visited = false;
-				if (maze[i][j] == 0)
-					node->weight = 1;
-				else
-					node->weight = maze[i][j];
-				node->lowestCost = INT_MAX;
-				verticies.push_back(node); // Verticies should only have non-walls
+				if (maze[i][j] != 1)
+				{
+					Vertex* node = new Vertex(); // Possible memory leak? (if new -> then delete is necessary)
+					node->xPos = i;
+					node->yPos = j;
+					node->heuristic = abs((int)(endX - i)) + abs((int)(endY - j));
+					node->visited = false;
+					if (maze[i][j] == 0)
+						node->weight = 1;
+					else
+						node->weight = maze[i][j];
+					node->lowestCost = INT_MAX;
+					vertices.push_back(node); // Vertices should only have non-walls
+				}
 			}
 		}
+		
 	}
+	*/
 
 	
 }
@@ -98,7 +107,7 @@ void MyGraph::RemoveVertex()
 
 Vertex* MyGraph::FindVertex(int x, int y)
 {
-	for (Vertex* vertex : verticies)
+	for (Vertex* vertex : vertices)
 	{
 		if(vertex->isWall)
 		{
@@ -116,10 +125,10 @@ Vertex* MyGraph::FindVertex(int x, int y)
 //Fills the Adjacency Matrix
 void MyGraph::FillAdjMatrix()
 {	
-	for(int i=0;i<verticies.size();i++) // verticies is a vector rather than an arr
+	for(int i=0;i<vertices.size();i++) // verticies is a vector rather than an arr
 										// so each "vertical" adjacency is width positions away
 	{
-		for (int j = 0; j < verticies.size(); j++)
+		for (int j = 0; j < vertices.size(); j++)
 		{
 			if (i == j)
 			{
@@ -127,20 +136,20 @@ void MyGraph::FillAdjMatrix()
 			}
 			if (i - width > 0) // Any adj vertex above
 			{
-				adjMatrix[i][j] = AddEdge(verticies.at(i), verticies.at(i - width));
+				adjMatrix[i][j] = AddEdge(vertices.at(i), vertices.at(i - width));
 				
 			}
 			if (i + width < height * width) // Any adj vertex below
 			{
-				adjMatrix[i][j] = AddEdge(verticies.at(i), verticies.at(i +width));
+				adjMatrix[i][j] = AddEdge(vertices.at(i), vertices.at(i +width));
 			}
 			if (i - 1 > 0) // Any left adj vertex
 			{
-				adjMatrix[i][j] = AddEdge(verticies.at(i), verticies.at(i - 1));
+				adjMatrix[i][j] = AddEdge(vertices.at(i), vertices.at(i - 1));
 			}
 			if (i + 1 < height * width) // Any right adj vertex
 			{
-				adjMatrix[i][j] = AddEdge(verticies.at(i), verticies.at(i +1));
+				adjMatrix[i][j] = AddEdge(vertices.at(i), vertices.at(i +1));
 			}
 			
 		}
@@ -163,9 +172,9 @@ int MyGraph::AddEdge(Vertex* vert1, Vertex* vert2)
 
 MyGraph::~MyGraph()
 {
-	for(int i=0;i<verticies.size();i++)
+	for(int i=0;i<vertices.size();i++)
 	{
-		delete verticies.at(i);
+		delete vertices.at(i);
 		
 	}
 	for(int i=0;i<width;i++)
@@ -173,7 +182,7 @@ MyGraph::~MyGraph()
 		delete[] adjMatrix[i];
 	}
 	delete[] adjMatrix;
-	verticies.clear();
+	vertices.clear();
 	cout << "Graph class yeet" << endl;
 }
 

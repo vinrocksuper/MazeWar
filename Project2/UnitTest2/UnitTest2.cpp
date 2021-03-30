@@ -33,7 +33,8 @@ namespace UnitTest2
 				}
 			}
 			
-			MyGraph graph(0, 0, 1, 1, 3, 3,pMazeData);
+			//MyGraph graph(0, 0, 1, 1, 3, 3,pMazeData);
+			MyGraph graph(0, 0, 1, 1, 3, 3);
 			v1->isWall = true;
 			Assert::IsTrue((graph.AddEdge(v1,v2) == 0)); // Should return true
 		}
@@ -53,7 +54,8 @@ namespace UnitTest2
 				}
 			}
 
-			MyGraph graph(0, 0, 1, 1, 3, 3, pMazeData);
+			//MyGraph graph(0, 0, 1, 1, 3, 3,pMazeData);
+			MyGraph graph(0, 0, 1, 1, 3, 3);
 
 			graph.AddVertex(new Vertex(0, 0));
 			graph.AddVertex(new Vertex(0, 1));

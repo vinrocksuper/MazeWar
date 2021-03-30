@@ -17,7 +17,7 @@ int yPath[] = { 0,0,0,1,2,3,4,4,4,4 };
 int currentStep = 0;
 bool mazeSet = false;
 bool init = false;
-MyGraph graph;
+//MyGraph graph(startX, startY, endX, endY, mazeWidth, mazeHeight, pMazeData);
 
 // Returns string of team members name
 __declspec(dllexport) char* GetTeam() {

@@ -10,7 +10,7 @@ using namespace std;
 {
 public:
 	//List of vertices in graph
-	vector<Vertex*> verticies; //
+	vector<Vertex*> vertices; //
 	int** adjMatrix; //   2D Array of adjacencies
 	int** maze;
 	
@@ -27,7 +27,7 @@ public:
 	int height;
 	
 	//Constructors
-	MyGraph(int sX, int sY, int eX, int eY, int w, int h, int** mazecopy);
+	MyGraph(int sX, int sY, int eX, int eY, int w, int h);
 
 
 	//MyGraph();
