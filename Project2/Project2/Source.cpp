@@ -47,6 +47,12 @@ __declspec(dllexport) bool SetMaze(const int** data, int width, int height) {
 	mazeWidth = width;
 	mazeHeight = height;
 	mazeSet = true;
+
+	//
+	// FUNCTION NEEDS TO CALL PATHFINDING ALGO
+	//
+
+	
 	return mazeSet;
 }
 
@@ -74,27 +80,7 @@ __declspec(dllexport) bool GetNextPosition(int& xpos, int& ypos) {
 
 	if (init == false)
 	{
-		// add nodes to graph
-		for (size_t i = 0; i < mazeWidth; i++)
-		{
-			for (size_t j = 0; j < mazeHeight; j++)
-			{
-				if (pMazeData[i][j] != 1)
-				{
-					Vertex* node = new Vertex;
-					node->xPos = i;
-					node->yPos = j;
-					node->heuristic = abs((int)(endX - i)) + abs((int)(endY - j));
-					node->visited = false;
-					if (pMazeData[i][j] == 0)
-						node->weight = 1;
-					else
-						node->weight = pMazeData[i][j];
-					node->lowestCost = INT_MAX;
-					graph.AddVertex(node);
-				}
-			}
-		}
+		
 		
 	}
 	xpos = xPath[currentStep];

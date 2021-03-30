@@ -12,7 +12,7 @@ public:
 	//List of vertices in graph
 	vector<Vertex*> verticies; //
 	int** adjMatrix; //   2D Array of adjacencies
-
+	int** maze;
 	
 	Vertex* currentVertex; // Try to use ptrs as much as possible
 	stack<Vertex*> vertStack; // Stack of verts (Last In First Out)
@@ -25,9 +25,12 @@ public:
 	int endY;
 	int width;
 	int height;
+	
 	//Constructors
-	MyGraph(int sX, int sY, int eX, int eY, int w, int h);
-	MyGraph();
+	MyGraph(int sX, int sY, int eX, int eY, int w, int h, int** mazecopy);
+
+
+	//MyGraph();
 
 	//Destructors
 	~MyGraph();
@@ -44,9 +47,14 @@ public:
 	// Using Manhattan Values
 	void AssignHeuristic(Vertex* vert);
 
-	void FillAdjMatrix();
+	void FillAdjMatrix(); // Fills the adjacency matrix
 
-	static int AddEdge(Vertex* vert1, Vertex* vert2);
-	void AddEdge(int vert1, int vert2);
-	int GetNodeIndex(int x, int y);
+	static int AddEdge(Vertex* vert1, Vertex* vert2); // Adds an edge between the two
+
+
+	//int GetNodeIndex(int x, int y); // ???? Unsure 
+
+	Vertex* FindVertex(int x, int y);
+
+	void SolveMaze();
 };

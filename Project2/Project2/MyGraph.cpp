@@ -2,7 +2,7 @@
 #include "MyGraph.h"
 
 
-MyGraph::MyGraph(int sX, int sY, int eX, int eY, int w, int h)
+MyGraph::MyGraph(int sX, int sY, int eX, int eY, int w, int h,int** mazecopy)
 {
 	startX = sX;
 	startY = sY;
@@ -10,6 +10,7 @@ MyGraph::MyGraph(int sX, int sY, int eX, int eY, int w, int h)
 	endY = eY;
 	width = w;
 	height = h;
+	maze = mazecopy;
 	
 	//Sets up adjMatrix
 	adjMatrix = new int* [width*height];
@@ -24,6 +25,31 @@ MyGraph::MyGraph(int sX, int sY, int eX, int eY, int w, int h)
 			adjMatrix[i][j] = 0;
 		}
 	}
+
+
+	// add nodes to graph
+	for (size_t i = 0; i < width; i++)
+	{
+		for (size_t j = 0; j < height; j++)
+		{
+			if (maze[i][j] != 1)
+			{
+				Vertex* node = new Vertex; // Possible memory leak? (if new -> then delete is necessary)
+				node->xPos = i;
+				node->yPos = j;
+				node->heuristic = abs((int)(endX - i)) + abs((int)(endY - j));
+				node->visited = false;
+				if (maze[i][j] == 0)
+					node->weight = 1;
+				else
+					node->weight = maze[i][j];
+				node->lowestCost = INT_MAX;
+				verticies.push_back(node); // Verticies should only have non-walls
+			}
+		}
+	}
+
+	
 }
 
 // On moving into new vertex push it to stack. Mark it as visited.
@@ -31,7 +57,6 @@ MyGraph::MyGraph(int sX, int sY, int eX, int eY, int w, int h)
 void MyGraph::AddVertex(Vertex* vert)
 {
 	vertStack.push(vert);
-	verticies.push_back(vert);
 	//vert->visited = true;
 }
 
@@ -44,24 +69,47 @@ void MyGraph::AssignHeuristic(Vertex* vert)
 
 // If no adj unvisited vertex, pop it from stack
 // Else push adjacent vertex into stack
-//UNFINISHED
+// FINISHED?
 void MyGraph::RemoveVertex()
 {
 	bool zeroAdj = true; // Assume no adjacencies left.
-	for(int i=0;i < width;i++)
+	for(int i=0;i < height;i++)
 	{
-		if(adjMatrix[currentVertex->xPos][i] == 1 )
+		if(adjMatrix[currentVertex->xPos][i] == 1) // if adjacent
 		{
-			// push adj vertex into stack
-			zeroAdj = false; 
+			Vertex* adjVert = FindVertex(currentVertex->xPos, i);
+			if(!adjVert->visited) // if adj and not visited
+			{
+				adjVert->previousVertex = currentVertex;
+				adjVert->visited = true;
+				// push adj vertex into stack
+				AddVertex(adjVert);
+				zeroAdj = false;
+			}
 		}
 	}
 	if(zeroAdj) // Since no adjacent vertex, pop it from stack.
 	{
 		vertStack.pop();
 	}
+}
 
 
+
+Vertex* MyGraph::FindVertex(int x, int y)
+{
+	for (Vertex* vertex : verticies)
+	{
+		if(vertex->isWall)
+		{
+			continue;
+		}
+		if (vertex->xPos == x && vertex->yPos == y)
+		{
+			return vertex; // Returns vertex ptr
+		}
+	}
+	return nullptr; // Returns nullptr if not found
 }
 
 
@@ -127,4 +175,11 @@ MyGraph::~MyGraph()
 	delete[] adjMatrix;
 	verticies.clear();
 	cout << "Graph class yeet" << endl;
+}
+
+
+void MyGraph::SolveMaze()
+{
+
+	
 }

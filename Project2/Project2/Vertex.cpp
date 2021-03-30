@@ -10,7 +10,10 @@ Vertex::Vertex(int x, int y)
 	
 }
 
-Vertex::Vertex()
+Vertex::~Vertex()
 {
-
+	if(previousVertex != nullptr)
+	{
+		delete previousVertex;
+	}
 }

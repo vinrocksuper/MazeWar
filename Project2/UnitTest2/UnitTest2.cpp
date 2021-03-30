@@ -19,14 +19,41 @@ namespace UnitTest2
 		{
 			Vertex* v1 = new Vertex(0, 0);
 			Vertex* v2 = new Vertex(0, 1);
-			MyGraph graph(0, 0, 1, 1, 3, 3);
+
+			int** pMazeData = new int* [3];
+			for (size_t i = 0; i < 3; i++)
+			{
+				pMazeData[i] = new int[3];
+			}
+			for (size_t i = 0; i < 3; i++)
+			{
+				for (size_t j = 0; j < 3; j++)
+				{
+					pMazeData[i][j] = 0;
+				}
+			}
+			
+			MyGraph graph(0, 0, 1, 1, 3, 3,pMazeData);
 			v1->isWall = true;
 			Assert::IsTrue((graph.AddEdge(v1,v2) == 0)); // Should return true
 		}
 
 		TEST_METHOD(TestFillAdjacency)
 		{
-			MyGraph graph(0, 0, 3, 3, 3, 3);
+			int** pMazeData = new int* [3];
+			for (size_t i = 0; i < 3; i++)
+			{
+				pMazeData[i] = new int[3];
+			}
+			for (size_t i = 0; i < 3; i++)
+			{
+				for (size_t j = 0; j < 3; j++)
+				{
+					pMazeData[i][j] = 0;
+				}
+			}
+
+			MyGraph graph(0, 0, 1, 1, 3, 3, pMazeData);
 
 			graph.AddVertex(new Vertex(0, 0));
 			graph.AddVertex(new Vertex(0, 1));
