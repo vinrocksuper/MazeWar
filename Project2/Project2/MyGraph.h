@@ -55,7 +55,7 @@ public:
 
 	//int GetNodeIndex(int x, int y); // ???? Unsure 
 
-	Vertex* FindVertex(int x, int y);
+	Vertex* FindVertex(int idx);
 
 	void SolveMaze(Vertex* startVertex, Vertex* endVertex);
 

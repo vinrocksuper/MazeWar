@@ -88,7 +88,7 @@ void MyGraph::RemoveVertex()
 	{
 		if(adjMatrix[currentVertex->index][i] == 1) // if adjacent
 		{
-			Vertex* adjVert = FindVertex(currentVertex->xPos, i);
+			Vertex* adjVert = FindVertex(i);
 			if(!adjVert->visited) // if adj and not visited
 			{
 				adjVert->previousVertex = currentVertex;
@@ -107,7 +107,7 @@ void MyGraph::RemoveVertex()
 
 
 
-Vertex* MyGraph::FindVertex(int x, int y)
+Vertex* MyGraph::FindVertex(int idx)
 {
 	for (Vertex* vertex : vertices)
 	{
@@ -115,7 +115,7 @@ Vertex* MyGraph::FindVertex(int x, int y)
 		{
 			continue;
 		}
-		if (vertex->xPos == x && vertex->yPos == y)
+		if (vertex->index == idx)
 		{
 			return vertex; // Returns vertex ptr
 		}
@@ -206,7 +206,10 @@ void MyGraph::SolveMaze(Vertex* startVertex, Vertex* endVertex)
 		vector<Vertex*> neighborsList; 
 		
 		for (int i = 0; i < sizeof(adjMatrix); i++) {
-			
+			if(adjMatrix[current->index][i]== 1)
+			{
+				neighborsList.push_back(FindVertex(i));
+			}
 		}
 	}
 
