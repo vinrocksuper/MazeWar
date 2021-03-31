@@ -83,7 +83,7 @@ void MyGraph::RemoveVertex()
 	bool zeroAdj = true; // Assume no adjacencies left.
 	for(int i=0;i < height;i++)
 	{
-		if(adjMatrix[currentVertex->xPos][i] == 1) // if adjacent
+		if(adjMatrix[currentVertex->xPos+currentVertex->yPos][i] == 1) // if adjacent
 		{
 			Vertex* adjVert = FindVertex(currentVertex->xPos, i);
 			if(!adjVert->visited) // if adj and not visited
