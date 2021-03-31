@@ -13,7 +13,7 @@ MyGraph::MyGraph(int sX, int sY, int eX, int eY, int w, int h)
 	height = h;
 	maze = nullptr;	
 	currentVertex = nullptr;
-
+	vertexCount = 0;
 	
 	//Sets up adjMatrix
 	adjMatrix = new int* [width*height];
@@ -49,7 +49,10 @@ MyGraph::MyGraph(int sX, int sY, int eX, int eY, int w, int h)
 					else
 						node->weight = maze[i][j];
 					node->lowestCost = INT_MAX;
+					node->index = vertexCount;
+					vertexCount++;
 					vertices.push_back(node); // Vertices should only have non-walls
+					
 				}
 			}
 		}
@@ -83,7 +86,7 @@ void MyGraph::RemoveVertex()
 	bool zeroAdj = true; // Assume no adjacencies left.
 	for(int i=0;i < height;i++)
 	{
-		if(adjMatrix[currentVertex->xPos][i] == 1) // if adjacent
+		if(adjMatrix[currentVertex->index][i] == 1) // if adjacent
 		{
 			Vertex* adjVert = FindVertex(currentVertex->xPos, i);
 			if(!adjVert->visited) // if adj and not visited
