@@ -211,6 +211,9 @@ void MyGraph::SolveMaze(Vertex* startVertex, Vertex* endVertex)
 				neighborsList.push_back(FindVertex(i));
 			}
 		}
+
+		
+
 	}
 
 }
