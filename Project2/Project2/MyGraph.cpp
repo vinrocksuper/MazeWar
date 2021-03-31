@@ -29,7 +29,7 @@ MyGraph::MyGraph(int sX, int sY, int eX, int eY, int w, int h)
 	}
 
 	// UNRESOLVED EXTERNAL 
-	 /*
+	
 	if(maze != nullptr)
 	{
 		// add nodes to graph
@@ -56,7 +56,7 @@ MyGraph::MyGraph(int sX, int sY, int eX, int eY, int w, int h)
 		}
 		
 	}
-	*/
+	
 
 	
 }
