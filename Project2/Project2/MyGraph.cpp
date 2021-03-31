@@ -191,22 +191,22 @@ MyGraph::~MyGraph()
 
 void MyGraph::SolveMaze(Vertex* startVertex, Vertex* endVertex)
 {
-	Vertex* current = startVertex;
+	currentVertex = startVertex;
 	priority_queue <Vertex*> openList;
 	openList.push(startVertex);
 	vector<Vertex*> closedList;
 	
 	// While lowest distance vertex in openList is not the goal
 	while (openList.top() != endVertex) {
-		current = openList.top();
+		currentVertex = openList.top();
 		openList.pop();
-		closedList.push_back(current);
+		closedList.push_back(currentVertex);
 
 		// For each neighbor of current
 		vector<Vertex*> neighborsList; 
 		
 		for (int i = 0; i < sizeof(adjMatrix); i++) {
-			if(adjMatrix[current->index][i]== 1)
+			if(adjMatrix[currentVertex->index][i]== 1)
 			{
 				neighborsList.push_back(FindVertex(i));
 			}
