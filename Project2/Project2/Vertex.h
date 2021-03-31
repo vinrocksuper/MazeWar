@@ -11,7 +11,7 @@ public:
 	Vertex* previousVertex; // ptr to previous vert
 	bool isWall; // is the Vertex a wall, false if not a wall, true if
 	int open; // for the mazeData itself, 0 if open, 1 if wall
-
+	int index;
 	
 	int weight; // UNSURE IF NECESSARY
 	int lowestCost; // UNSURE IF NECESSARY

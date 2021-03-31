@@ -25,6 +25,7 @@ public:
 	int endY;
 	int width;
 	int height;
+	int vertexCount;
 	
 	//Constructors
 	MyGraph(int sX, int sY, int eX, int eY, int w, int h);
