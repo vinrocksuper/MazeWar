@@ -1,5 +1,6 @@
 ﻿#include "pch.h"
 #include "MyGraph.h"
+#include <queue>
 
 
 MyGraph::MyGraph(int sX, int sY, int eX, int eY, int w, int h)
@@ -185,8 +186,27 @@ MyGraph::~MyGraph()
 }
 
 
-void MyGraph::SolveMaze()
+void MyGraph::SolveMaze(Vertex* startVertex, Vertex* endVertex)
 {
-
+	Vertex* current = startVertex;
+	priority_queue <Vertex*> openList;
+	openList.push(startVertex);
+	vector<Vertex*> closedList;
 	
+	// While lowest distance vertex in openList is not the goal
+	while (openList.top() != endVertex) {
+		current = openList.top();
+		openList.pop();
+		closedList.push_back(current);
+
+		// For each neighbor of current
+		for (Vertex neighbor : ) {
+			
+		}
+	}
+
+}
+
+vector<Vertex*> MyGraph::GetNonVisitedNeighbors(Vertex v) {
+
 }
