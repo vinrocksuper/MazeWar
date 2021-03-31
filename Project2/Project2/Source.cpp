@@ -77,16 +77,6 @@ __declspec(dllexport) bool GetNextPosition(int& xpos, int& ypos) {
 		return true;
 	}
 	return false;
-
-	if (init == false)
-	{
-		
-		
-	}
-	xpos = xPath[currentStep];
-	ypos = yPath[currentStep];
-	currentStep++;
-	return true;
 }
 
 // sets starting location for player. Saves the x and y values for starting pos
