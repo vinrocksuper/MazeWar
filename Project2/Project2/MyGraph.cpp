@@ -50,6 +50,7 @@ MyGraph::MyGraph(int sX, int sY, int eX, int eY, int w, int h)
 						node->weight = maze[i][j];
 					node->lowestCost = INT_MAX;
 					node->index = vertexCount;
+					node->open = true;
 					vertexCount++;
 					vertices.push_back(node); // Vertices should only have non-walls
 					
@@ -211,8 +212,8 @@ void MyGraph::SolveMaze(Vertex* startVertex, Vertex* endVertex)
 				neighborsList.push_back(FindVertex(i));
 			}
 		}
+		
 	}
 
+
 }
-
-
