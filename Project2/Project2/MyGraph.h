@@ -58,5 +58,4 @@ public:
 
 	void SolveMaze(Vertex* startVertex, Vertex* endVertex);
 
-	vector<Vertex*> GetNonVisitedNeighbors(Vertex v)
 };

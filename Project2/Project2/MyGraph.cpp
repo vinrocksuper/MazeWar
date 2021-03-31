@@ -200,13 +200,13 @@ void MyGraph::SolveMaze(Vertex* startVertex, Vertex* endVertex)
 		closedList.push_back(current);
 
 		// For each neighbor of current
-		for (Vertex neighbor : ) {
+		vector<Vertex*> neighborsList; 
+		
+		for (int i = 0; i < sizeof(adjMatrix); i++) {
 			
 		}
 	}
 
 }
 
-vector<Vertex*> MyGraph::GetNonVisitedNeighbors(Vertex v) {
 
-}
