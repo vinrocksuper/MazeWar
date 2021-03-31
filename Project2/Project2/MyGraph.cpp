@@ -27,8 +27,6 @@ MyGraph::MyGraph(int sX, int sY, int eX, int eY, int w, int h)
 			adjMatrix[i][j] = 0;
 		}
 	}
-
-	// UNRESOLVED EXTERNAL 
 	
 	if(maze != nullptr)
 	{
