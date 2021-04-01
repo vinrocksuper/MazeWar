@@ -67,13 +67,9 @@ namespace UnitTest2
 			graph.AddVertex(new Vertex(2, 1));
 			graph.AddVertex(new Vertex(2, 2));
 
-			
 			graph.FillAdjMatrix();
 
-			// Test fail when graph.adjMatrix[2][1] == 1
-			// changed to 0 and it passed
-			// Is there something wrong??
-			Assert::IsTrue((graph.adjMatrix[2][1] == 0));
+			Assert::IsTrue((graph.adjMatrix[4][5] == 1)); // Should work
 			
 			
 		}

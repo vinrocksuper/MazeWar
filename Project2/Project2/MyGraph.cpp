@@ -69,6 +69,7 @@ MyGraph::MyGraph(int sX, int sY, int eX, int eY, int w, int h)
 void MyGraph::AddVertex(Vertex* vert)
 {
 	vertStack.push(vert);
+	vertices.push_back(vert);
 	//vert->visited = true;
 }
 
@@ -81,7 +82,7 @@ void MyGraph::AssignHeuristic(Vertex* vert)
 
 // If no adj unvisited vertex, pop it from stack
 // Else push adjacent vertex into stack
-// FINISHED?
+// FINISHED? 
 void MyGraph::RemoveVertex()
 {
 	bool zeroAdj = true; // Assume no adjacencies left.
@@ -137,22 +138,22 @@ void MyGraph::FillAdjMatrix()
 			{
 				continue;
 			}
-			if (i - width > 0) // Any adj vertex above
+			if (i - width >= 0) // Any adj vertex above
 			{
-				adjMatrix[i][j] = AddEdge(vertices.at(i), vertices.at(i - width));
+				adjMatrix[i][i-width] = AddEdge(vertices.at(i), vertices.at(i - width));
 				
 			}
 			if (i + width < height * width) // Any adj vertex below
 			{
-				adjMatrix[i][j] = AddEdge(vertices.at(i), vertices.at(i +width));
+				adjMatrix[i][i + width] = AddEdge(vertices.at(i), vertices.at(i +width));
 			}
-			if (i - 1 > 0) // Any left adj vertex
+			if (i - 1 >= 0) // Any left adj vertex
 			{
-				adjMatrix[i][j] = AddEdge(vertices.at(i), vertices.at(i - 1));
+				adjMatrix[i][i - 1] = AddEdge(vertices.at(i), vertices.at(i - 1));
 			}
 			if (i + 1 < height * width) // Any right adj vertex
 			{
-				adjMatrix[i][j] = AddEdge(vertices.at(i), vertices.at(i +1));
+				adjMatrix[i][i + 1] = AddEdge(vertices.at(i), vertices.at(i +1));
 			}
 			
 		}
