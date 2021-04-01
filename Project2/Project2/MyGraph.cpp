@@ -244,25 +244,23 @@ void MyGraph::SolveMaze(Vertex* startVertex, Vertex* endVertex)
 	}
 }
 
-/**
- * 
- *
+// Vincent Li's A-Star attempt. Feel free to comment out.
 void MyGraph::AStarTest(Vertex* startVertex, Vertex* endVertex)
 {
-	priority_queue <Vertex*, vector<Vertex*>, greater<Vertex*>> openList; // MIN-HEAP
-	openList.push(startVertex); // q
+	vector<Vertex*> openList; 
+	openList.push_back(startVertex); // q
 	vector<Vertex*> closedList;
 
-	while(openList.top() != endVertex)
+	while(openList.back() != endVertex)
 	{
-		currentVertex = openList.top();
+		currentVertex = openList.back();
 		closedList.push_back(currentVertex);
 		currentVertex->visited = true;
 
 		// For each neighbor of current
 		vector<Vertex*> neighborsList;
 
-		for (int i = 0; i < sizeof(adjMatrix); i++) {
+		for (int i = 0; i < vertexCount; i++) {
 			if (adjMatrix[currentVertex->index][i] == 1)
 			{
 				neighborsList.push_back(FindVertex(i));
@@ -274,26 +272,34 @@ void MyGraph::AStarTest(Vertex* startVertex, Vertex* endVertex)
 		{
 			Vertex* neighbor = neighborsList[i];
 			int cost = currentVertex->heuristic + 1; // Cost = G(Current) + weight
-			
+			bool inOpen = true;
+			bool inClosed = true;
 			for(int i=0;i<openList.size();i++)
 			{
-				if(openList.top() == neighbor && neighbor->heuristic <  cost)
+				if(openList[i] == neighbor && neighbor->heuristic <  cost)
 				{
-					openList.pop();
+					openList.erase(openList.begin()+i); // removes from openList @pos i
+					inOpen = false;
 				}
 			}
 			for(int i=0;i<closedList.size();i++)
 			{
 				if(closedList[i] == neighbor && closedList[i]->heuristic < cost)
 				{
-					
+					closedList.erase(closedList.begin() + i); // removes from closedList @pos i
+					inClosed = false;
 				}
+			}
+			if(!inOpen && !inClosed) 
+			{
+				// UNSURE abt what goes in here.
+				neighbor->lowestCost = cost;
 			}
 		}
 
 	}
 }
-*/ //PERSONAL ATTEMPT @ A* PATHFINDING IGNORE FOR NOW -Vincent
+
 
 void MyGraph::printMatrix()
 {
