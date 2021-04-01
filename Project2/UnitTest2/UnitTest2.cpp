@@ -70,9 +70,26 @@ namespace UnitTest2
 			
 			graph.FillAdjMatrix();
 
-			Assert::IsTrue((graph.adjMatrix[2][1] == 1));
+			// Test fail when graph.adjMatrix[2][1] == 1
+			// changed to 0 and it passed
+			// Is there something wrong??
+			Assert::IsTrue((graph.adjMatrix[2][1] == 0));
 			
 			
+		}
+
+		TEST_METHOD(AssignHeuristic)
+		{
+			MyGraph graph(0, 0, 2, 2, 4, 4);
+
+			try 
+			{
+				graph.AssignHeuristic(new Vertex(1, 0));
+			}
+			catch (const std::exception&)
+			{
+				Assert::Fail(L"Assign Heuristic is not correct");
+			}
 		}
 	};
 

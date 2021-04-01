@@ -59,4 +59,7 @@ public:
 
 	void SolveMaze(Vertex* startVertex, Vertex* endVertex);
 
+
+	void AStarTest(Vertex* startVertex, Vertex* endVertex);
+
 };
