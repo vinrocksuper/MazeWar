@@ -62,4 +62,8 @@ public:
 
 	void AStarTest(Vertex* startVertex, Vertex* endVertex);
 
+
+	void printNodes();
+	void printMatrix();
+
 };

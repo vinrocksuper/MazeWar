@@ -70,10 +70,11 @@ void MyGraph::AddVertex(Vertex* vert)
 {
 	vertStack.push(vert);
 	vertices.push_back(vert);
-	//vert->visited = true;
+	AssignHeuristic(vert);
+	vertexCount++;
 }
 
-// Assigns heurstic value to individual vertexes
+// Assigns heuristic value to individual vertexes
 // FINISHED
 void MyGraph::AssignHeuristic(Vertex* vert)
 {
@@ -235,7 +236,7 @@ void MyGraph::SolveMaze(Vertex* startVertex, Vertex* endVertex)
 				}
 			}
 
-				
+			
 
 
 		}
@@ -243,4 +244,74 @@ void MyGraph::SolveMaze(Vertex* startVertex, Vertex* endVertex)
 	}
 }
 
+/**
+ * 
+ *
+void MyGraph::AStarTest(Vertex* startVertex, Vertex* endVertex)
+{
+	priority_queue <Vertex*, vector<Vertex*>, greater<Vertex*>> openList; // MIN-HEAP
+	openList.push(startVertex); // q
+	vector<Vertex*> closedList;
 
+	while(openList.top() != endVertex)
+	{
+		currentVertex = openList.top();
+		closedList.push_back(currentVertex);
+		currentVertex->visited = true;
+
+		// For each neighbor of current
+		vector<Vertex*> neighborsList;
+
+		for (int i = 0; i < sizeof(adjMatrix); i++) {
+			if (adjMatrix[currentVertex->index][i] == 1)
+			{
+				neighborsList.push_back(FindVertex(i));
+				FindVertex(i)->previousVertex = currentVertex;
+			}
+		}
+
+		for(int i=0;i<sizeof(neighborsList);i++)
+		{
+			Vertex* neighbor = neighborsList[i];
+			int cost = currentVertex->heuristic + 1; // Cost = G(Current) + weight
+			
+			for(int i=0;i<openList.size();i++)
+			{
+				if(openList.top() == neighbor && neighbor->heuristic <  cost)
+				{
+					openList.pop();
+				}
+			}
+			for(int i=0;i<closedList.size();i++)
+			{
+				if(closedList[i] == neighbor && closedList[i]->heuristic < cost)
+				{
+					
+				}
+			}
+		}
+
+	}
+}
+*/ //PERSONAL ATTEMPT @ A* PATHFINDING IGNORE FOR NOW -Vincent
+
+void MyGraph::printMatrix()
+{
+	for(int i=0;i<vertexCount;i++)
+	{
+	
+		for(int j=0;j<vertexCount;j++)
+		{
+			cout << adjMatrix[i][j];
+		}
+		cout << endl;
+	}
+}
+
+void MyGraph::printNodes()
+{
+	for (auto && vertex : vertices)
+	{
+		cout << vertex->xPos << ", " << vertex->yPos << ", heuristic " << vertex->heuristic << endl;
+	}
+}
