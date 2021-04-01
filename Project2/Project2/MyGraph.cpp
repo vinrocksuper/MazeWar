@@ -212,7 +212,9 @@ void MyGraph::SolveMaze(Vertex* startVertex, Vertex* endVertex)
 			}
 		}
 
-		
+		for (Vertex *v : neighborsList) {
+			v->lowestCost = (v->lowestCost - startVertex->lowestCost) + currentVertex->lowestCost;
+		}
 
 	}
 
