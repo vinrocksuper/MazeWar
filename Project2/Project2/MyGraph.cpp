@@ -193,10 +193,13 @@ MyGraph::~MyGraph()
 void MyGraph::SolveMaze(Vertex* startVertex, Vertex* endVertex)
 {
 	currentVertex = startVertex;
-	priority_queue <Vertex*> openList;
+	priority_queue <Vertex*, vector<Vertex*>, greater<Vertex*>> openList; // MIN-HEAP
+	priority_queue <Vertex*, vector<Vertex*>, greater<Vertex*>> openListCopy; // MIN-HEAP
 	openList.push(startVertex);
 	vector<Vertex*> closedList;
-	
+
+	openListCopy = openList;
+
 	// While lowest distance vertex in openList is not the goal
 	while (openList.top() != endVertex) {
 		currentVertex = openList.top();
@@ -204,15 +207,39 @@ void MyGraph::SolveMaze(Vertex* startVertex, Vertex* endVertex)
 		closedList.push_back(currentVertex);
 
 		// For each neighbor of current
-		vector<Vertex*> neighborsList; 
-		
+		vector<Vertex*> neighborsList;
+
 		for (int i = 0; i < sizeof(adjMatrix); i++) {
-			if(adjMatrix[currentVertex->index][i]== 1)
+			if (adjMatrix[currentVertex->index][i] == 1)
 			{
 				neighborsList.push_back(FindVertex(i));
 			}
 		}
-		
+
+		for (Vertex* neighbor : neighborsList) {
+			neighbor->lowestCost = (currentVertex->lowestCost - startVertex->lowestCost) + (neighbor->lowestCost - currentVertex->lowestCost);
+			
+			// If neighbor in Open and Cost < G(Neighbor)
+			for (int i = 0; i < openList.size(); i++) {
+				if (neighbor == openListCopy.top() && neighbor->lowestCost < (neighbor->lowestCost - startVertex->lowestCost)) {
+					delete closedList[i];
+				}
+				openListCopy.pop();
+			}
+			
+			// If neighbor in closed and Cost < G(Neighbor)
+			for (int i = 0; i < sizeof(closedList); i++) {
+				if (neighbor == closedList[i] && neighbor->lowestCost < (neighbor->lowestCost - startVertex->lowestCost)) {
+					delete closedList[i];
+				}
+			}
+
+				
+
+
+		}
+
 	}
+}
 
 
