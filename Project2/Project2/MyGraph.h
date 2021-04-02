@@ -16,7 +16,8 @@ public:
 	
 	Vertex* currentVertex; // Try to use ptrs as much as possible
 	stack<Vertex*> vertStack; // Stack of verts (Last In First Out)
-
+	Vertex* startVertex;
+	Vertex* endVertex;
 	
 	// Take these in from Source.cpp, save it here to reduce amnt of times needed to call in this info.
 	int startX;
@@ -57,13 +58,13 @@ public:
 
 	Vertex* FindVertex(int idx);
 
-	void SolveMaze(Vertex* startVertex, Vertex* endVertex);
+	void SolveMaze();
 
 
-	void AStarTest(Vertex* startVertex, Vertex* endVertex);
+	void AStarTest();
 
 
 	void printNodes();
 	void printMatrix();
-
+	vector<Vertex*> buildPath();
 };

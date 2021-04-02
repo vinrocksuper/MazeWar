@@ -192,7 +192,7 @@ MyGraph::~MyGraph()
 }
 
 
-void MyGraph::SolveMaze(Vertex* startVertex, Vertex* endVertex)
+void MyGraph::SolveMaze()
 {
 	currentVertex = startVertex;
 	priority_queue <Vertex*, vector<Vertex*>, greater<Vertex*>> openList; // MIN-HEAP
@@ -245,7 +245,7 @@ void MyGraph::SolveMaze(Vertex* startVertex, Vertex* endVertex)
 }
 
 // Vincent Li's A-Star attempt. Feel free to comment out.
-void MyGraph::AStarTest(Vertex* startVertex, Vertex* endVertex)
+void MyGraph::AStarTest()
 {
 	vector<Vertex*> openList; 
 	openList.push_back(startVertex); // q
@@ -263,8 +263,13 @@ void MyGraph::AStarTest(Vertex* startVertex, Vertex* endVertex)
 		for (int i = 0; i < vertexCount; i++) {
 			if (adjMatrix[currentVertex->index][i] == 1)
 			{
-				neighborsList.push_back(FindVertex(i));
-				FindVertex(i)->previousVertex = currentVertex;
+				Vertex* possibleNeighbor = FindVertex(i);
+				if(possibleNeighbor->visited == false)
+				{
+					neighborsList.push_back(possibleNeighbor);
+					possibleNeighbor->visited = true;
+				}
+				
 			}
 		}
 
@@ -292,13 +297,29 @@ void MyGraph::AStarTest(Vertex* startVertex, Vertex* endVertex)
 			}
 			if(!inOpen && !inClosed) 
 			{
-				// UNSURE abt what goes in here.
 				neighbor->lowestCost = cost;
+				neighbor->previousVertex = currentVertex;
 			}
 		}
 
 	}
 }
+
+vector<Vertex*> MyGraph::buildPath()
+{
+	vector<Vertex*> vertexes;
+	if(endVertex->previousVertex != nullptr)
+	{
+		Vertex* temp = endVertex;
+		while(temp != nullptr) // StartVertex should have a nullptr for previousVertex
+		{
+			vertexes.push_back(temp);
+			temp = temp->previousVertex;
+		}
+	}
+	return vertexes;
+}
+
 
 
 void MyGraph::printMatrix()
