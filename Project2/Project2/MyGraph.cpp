@@ -11,7 +11,7 @@ MyGraph::MyGraph(int sX, int sY, int eX, int eY, int w, int h)
 	endY = eY;
 	width = w;
 	height = h;
-	maze = nullptr;	
+	
 	currentVertex = nullptr;
 	vertexCount = 0;
 	
@@ -28,7 +28,9 @@ MyGraph::MyGraph(int sX, int sY, int eX, int eY, int w, int h)
 			adjMatrix[i][j] = 0;
 		}
 	}
-	
+	/**
+	 * 
+	 *
 	if(maze != nullptr)
 	{
 		// add nodes to graph
@@ -59,7 +61,7 @@ MyGraph::MyGraph(int sX, int sY, int eX, int eY, int w, int h)
 		}
 		
 	}
-	
+	*/
 
 	
 }
@@ -68,9 +70,13 @@ MyGraph::MyGraph(int sX, int sY, int eX, int eY, int w, int h)
 // UNFINISHED?
 void MyGraph::AddVertex(Vertex* vert)
 {
+	AssignHeuristic(vert);
+	vert->visited = false;
+	vert->index = vertexCount;
+	vert->open = true;
 	vertStack.push(vert);
 	vertices.push_back(vert);
-	AssignHeuristic(vert);
+	
 	vertexCount++;
 }
 

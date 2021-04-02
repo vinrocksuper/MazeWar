@@ -12,7 +12,6 @@ public:
 	//List of vertices in graph
 	vector<Vertex*> vertices; //
 	int** adjMatrix; //   2D Array of adjacencies
-	int** maze;
 	
 	Vertex* currentVertex; // Try to use ptrs as much as possible
 	stack<Vertex*> vertStack; // Stack of verts (Last In First Out)

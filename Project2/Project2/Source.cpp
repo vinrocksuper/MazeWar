@@ -17,7 +17,7 @@ int yPath[] = { 0,0,0,1,2,3,4,4,4,4 };
 int currentStep = 0;
 bool mazeSet = false;
 bool init = false;
-//MyGraph graph(startX, startY, endX, endY, mazeWidth, mazeHeight, pMazeData);
+MyGraph graph(startX, startY, endX, endY, mazeWidth, mazeHeight);
 
 // Returns string of team members name
 __declspec(dllexport) char* GetTeam() {
@@ -42,6 +42,7 @@ __declspec(dllexport) bool SetMaze(const int** data, int width, int height) {
 		for (size_t j = 0; j < height; j++)
 		{
 			pMazeData[i][j] = (int)data[i][j];
+			graph.AddVertex(new Vertex(i, j));
 		}
 	}
 	mazeWidth = width;
@@ -69,6 +70,12 @@ __declspec(dllexport) int** GetMaze(int& width, int& height) {
 
 // returns next x/y pos to move to. 
 __declspec(dllexport) bool GetNextPosition(int& xpos, int& ypos) {
+
+
+
+
+
+	
 	if(xPath[currentStep] && yPath[currentStep])
 	{
 		xpos = xPath[currentStep];
