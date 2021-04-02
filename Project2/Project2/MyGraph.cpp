@@ -206,6 +206,9 @@ void MyGraph::SolveMaze()
 	openList.push(startVertex);
 	vector<Vertex*> closedList;
 
+	bool inOpen = true;
+	bool inClosed = true;
+
 	openListCopy = openList;
 
 	// While lowest distance vertex in openList is not the goal
@@ -216,7 +219,6 @@ void MyGraph::SolveMaze()
 
 		// For each neighbor of current
 		vector<Vertex*> neighborsList;
-
 		for (int i = 0; i < sizeof(adjMatrix); i++) {
 			if (adjMatrix[currentVertex->index][i] == 1)
 			{
@@ -225,28 +227,34 @@ void MyGraph::SolveMaze()
 		}
 
 		for (Vertex* neighbor : neighborsList) {
-			neighbor->lowestCost = (currentVertex->lowestCost - startVertex->lowestCost) + (neighbor->lowestCost - currentVertex->lowestCost);
+			int Cost = (currentVertex->lowestCost - startVertex->lowestCost) + (neighbor->lowestCost - currentVertex->lowestCost);
+			int GNeighbor = neighbor->lowestCost - startVertex->lowestCost;
 			
 			// If neighbor in Open and Cost < G(Neighbor)
 			for (int i = 0; i < openList.size(); i++) {
-				if (neighbor == openListCopy.top() && neighbor->lowestCost < (neighbor->lowestCost - startVertex->lowestCost)) {
+				if (neighbor == openListCopy.top() && Cost < GNeighbor) {
 					delete closedList[i];
 				}
+				inOpen = false;
 				openListCopy.pop();
 			}
 			
 			// If neighbor in closed and Cost < G(Neighbor)
 			for (int i = 0; i < sizeof(closedList); i++) {
-				if (neighbor == closedList[i] && neighbor->lowestCost < (neighbor->lowestCost - startVertex->lowestCost)) {
+				if (neighbor == closedList[i] && Cost < GNeighbor) {
 					delete closedList[i];
 				}
+				inClosed = false;
 			}
 
-			
+			// If neighbor not in OpenList and Not in Closed list
+			if (inOpen == false && inClosed == false) {
+				GNeighbor = Cost;
+				openList.push(neighbor);
+				neighbor->previousVertex = currentVertex;
 
-
+			}
 		}
-
 	}
 }
 
