@@ -131,6 +131,21 @@ Vertex* MyGraph::FindVertex(int idx)
 	}
 	return nullptr; // Returns nullptr if not found
 }
+Vertex* MyGraph::FindVertex(int x, int y)
+{
+	for(Vertex* vertex: vertices)
+	{
+		if(vertex->isWall)
+		{
+			continue;
+		}
+		if(vertex->xPos == x && vertex->yPos == y)
+		{
+			return vertex;
+		}
+	}
+	return nullptr;
+}
 
 
 //Fills the Adjacency Matrix
@@ -254,6 +269,7 @@ void MyGraph::SolveMaze()
 // Possibly finished? Steve said looks MOSTLY right. Will need to figure out what that means?
 void MyGraph::AStarTest()
 {
+	startVertex = FindVertex(startX, startY);
 	vector<Vertex*> openList; 
 	openList.push_back(startVertex); // q
 	vector<Vertex*> closedList;

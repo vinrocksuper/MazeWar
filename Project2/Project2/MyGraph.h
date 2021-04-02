@@ -56,13 +56,15 @@ public:
 	//int GetNodeIndex(int x, int y); // ???? Unsure 
 
 	Vertex* FindVertex(int idx);
-
+	Vertex* FindVertex(int x, int y);
 	void SolveMaze();
 
 
 	void AStarTest();
 
 
+
+	
 	void printNodes();
 	void printMatrix();
 	vector<Vertex*> buildPath();
