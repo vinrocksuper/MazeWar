@@ -88,74 +88,38 @@ namespace UnitTest2
 			}
 		}
 
-		// UNFINSHED!!
-		TEST_METHOD(RemoveVertex)
-		{
-			try 
-			{
-				int** pMazeData = new int* [3];
-				for (size_t i = 0; i < 3; i++)
-				{
-					pMazeData[i] = new int[3];
-				}
-				for (size_t i = 0; i < 3; i++)
-				{
-					for (size_t j = 0; j < 3; j++)
-					{
-						pMazeData[i][j] = 0;
-					}
-				}
-
-				//MyGraph graph(0, 0, 1, 1, 3, 3,pMazeData);
-				MyGraph graph(0, 0, 1, 1, 3, 3);
-
-				graph.AddVertex(new Vertex(0, 0));
-				graph.AddVertex(new Vertex(0, 1));
-				graph.AddVertex(new Vertex(0, 2));
-				graph.AddVertex(new Vertex(1, 0));
-				graph.AddVertex(new Vertex(1, 1));
-				graph.AddVertex(new Vertex(1, 2));
-				graph.AddVertex(new Vertex(2, 0));
-				graph.AddVertex(new Vertex(2, 1));
-				graph.AddVertex(new Vertex(2, 2));
-
-				graph.FillAdjMatrix();
-
-				// set up the maze and fill matrix
-				// Did I miss something before call the remove vertex?
-
-				//graph.RemoveVertex();
-			}
-			catch (const std::exception&)
-			{
-				Assert::Fail(L"Remove Vertex is not correct");
-			}
-		}
-
-		TEST_METHOD(FindVertex)
+		TEST_METHOD(TestFindVertex)
 		{
 			MyGraph graph(0, 0, 1, 1, 3, 3);
-			try
-			{
-				graph.FindVertex(1);
-			}
-			catch (const std::exception&)
-			{
-				Assert::Fail(L"Find Vertex is not correct");
-			}
+
+			graph.AddVertex(new Vertex(0, 0));
+			graph.AddVertex(new Vertex(0, 1));
+			graph.AddVertex(new Vertex(0, 2));
+			graph.AddVertex(new Vertex(1, 0));
+			graph.AddVertex(new Vertex(1, 1));
+			graph.AddVertex(new Vertex(1, 2));
+			graph.AddVertex(new Vertex(2, 0));
+			graph.AddVertex(new Vertex(2, 1));
+			graph.AddVertex(new Vertex(2, 2));
+
+			graph.FillAdjMatrix();
+			
+			Vertex* possibleNeighbor = graph.FindVertex(3, 3);
+
+			Assert::IsTrue(possibleNeighbor == nullptr);
 		}
 
-		TEST_METHOD(BuildPath)
+		TEST_METHOD(TestBuildPath)
 		{
 
 		}
 
-		TEST_METHOD(PrintMatrix)
+		TEST_METHOD(TestGetNextPos)
 		{
 
 		}
 
-		TEST_METHOD(PrintNode)
+		TEST_METHOD(TestSolveMaze)
 		{
 
 		}
