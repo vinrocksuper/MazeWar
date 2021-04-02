@@ -245,6 +245,7 @@ void MyGraph::SolveMaze()
 }
 
 // Vincent Li's A-Star attempt. Feel free to comment out.
+// Possibly finished? Steve said looks MOSTLY right. Will need to figure out what that means?
 void MyGraph::AStarTest()
 {
 	vector<Vertex*> openList; 
@@ -305,6 +306,8 @@ void MyGraph::AStarTest()
 	}
 }
 
+//Backtracks from endVertex until startVertex.
+//Pushes each Vertex into a vector, then returns that vector with startVertex on top, endVertex on bottom.
 vector<Vertex*> MyGraph::buildPath()
 {
 	vector<Vertex*> vertexes;
