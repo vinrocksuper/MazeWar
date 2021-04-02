@@ -333,10 +333,11 @@ void MyGraph::AStarTest()
 					inClosed = false;
 				}
 			}
-
+			if(!inOpen && !inClosed) 
+			{
 				neighbor->lowestCost = cost;
 				neighbor->previousVertex = currentVertex;
-
+			}
 		}
 		//std::cout << currentVertex->xPos << currentVertex->yPos << endl;
 	}
