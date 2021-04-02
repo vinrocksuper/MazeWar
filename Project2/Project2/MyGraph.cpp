@@ -215,7 +215,8 @@ MyGraph::~MyGraph()
 
 void MyGraph::SolveMaze()
 {
-	currentVertex = startVertex;
+	startVertex = FindVertex(startX, startY);
+	endVertex = FindVertex(endX, endY);
 	priority_queue <Vertex*, vector<Vertex*>, greater<Vertex*>> openList; // MIN-HEAP
 	priority_queue <Vertex*, vector<Vertex*>, greater<Vertex*>> openListCopy; // MIN-HEAP
 	openList.push(startVertex);

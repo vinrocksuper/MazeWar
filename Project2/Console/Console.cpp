@@ -31,6 +31,11 @@ int main()
 
 	graph.FillAdjMatrix();
 	graph.printNodes();
-	graph.printMatrix();
+	graph.SolveMaze();
+	vector<Vertex*> printList = graph.buildPath();
+	for (auto && print_list : printList)
+	{
+		cout << print_list->xPos << "," << print_list->yPos << endl;
+	}
 
 }
