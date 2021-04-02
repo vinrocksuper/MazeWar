@@ -288,7 +288,7 @@ void MyGraph::AStarTest()
 	{
 		currentVertex = openList.back();
 		closedList.push_back(currentVertex);
-		//cout << currentVertex->xPos << currentVertex->yPos << " in closed list" << endl;
+		cout << currentVertex->xPos << currentVertex->yPos << endl;
 		currentVertex->visited = true;
 
 		// For each neighbor of current
@@ -308,8 +308,8 @@ void MyGraph::AStarTest()
 				
 			}
 		}
-		cout << "openList size " << openList.size() << endl;
-		cout << "closedList size " << closedList.size() << endl;
+		//cout << "openList size " << openList.size() << endl;
+		//cout << "closedList size " << closedList.size() << endl;
 		for(int i=0;i<neighborsList.size();i++)
 		{
 			Vertex* neighbor = neighborsList[i];
@@ -381,4 +381,16 @@ void MyGraph::printNodes()
 	{
 		cout << vertex->xPos << ", " << vertex->yPos << ", heuristic " << vertex->heuristic << endl;
 	}
+}
+
+void MyGraph::SetStart(int x, int y)
+{
+	startX = x;
+	startY = y;
+}
+
+void MyGraph::SetEnd(int x, int y)
+{
+	endX = x;
+	endY = y;
 }

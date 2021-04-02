@@ -62,8 +62,8 @@ public:
 
 	void AStarTest();
 
-
-
+	void SetStart(int x, int y);
+	void SetEnd(int x, int y);
 	
 	void printNodes();
 	void printMatrix();
