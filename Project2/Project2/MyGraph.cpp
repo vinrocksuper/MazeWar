@@ -280,6 +280,7 @@ void MyGraph::AStarTest()
 {
 	startVertex = FindVertex(startX, startY);
 	endVertex = FindVertex(endX, endY);
+	//cout << endVertex->previousVertex << endl;
 	vector<Vertex*> openList; 
 	openList.push_back(startVertex); // q
 	vector<Vertex*> closedList;
@@ -287,7 +288,19 @@ void MyGraph::AStarTest()
 	while(openList.back() != endVertex)
 	{
 		currentVertex = openList.back();
-		closedList.push_back(currentVertex);
+		bool closedAdd = true;
+		for(int i=0;i<closedList.size();i++)
+		{
+			if(closedList[i] == currentVertex)
+			{
+				closedAdd = false;
+			}
+		}
+		if(closedAdd)
+		{
+			closedList.push_back(currentVertex);
+		}
+		
 		cout << currentVertex->xPos << currentVertex->yPos << endl;
 		currentVertex->visited = true;
 
@@ -303,13 +316,14 @@ void MyGraph::AStarTest()
 				{
 					neighborsList.push_back(possibleNeighbor);
 					openList.push_back(possibleNeighbor);
+					//possibleNeighbor->previousVertex = currentVertex;
 					possibleNeighbor->visited = true;
 				}
 				
 			}
 		}
 		//cout << "openList size " << openList.size() << endl;
-		//cout << "closedList size " << closedList.size() << endl;
+		cout << "closedList size " << closedList.size() << endl;
 		for(int i=0;i<neighborsList.size();i++)
 		{
 			Vertex* neighbor = neighborsList[i];
@@ -325,6 +339,8 @@ void MyGraph::AStarTest()
 					inOpen = false;
 				}
 			}
+			
+
 			for(int i=0;i<closedList.size();i++)
 			{
 				if(closedList[i] == neighbor && closedList[i]->heuristic < cost)
@@ -333,6 +349,7 @@ void MyGraph::AStarTest()
 					inClosed = false;
 				}
 			}
+
 			if(!inOpen && !inClosed) 
 			{
 				neighbor->lowestCost = cost;
