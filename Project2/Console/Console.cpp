@@ -31,7 +31,7 @@ int main()
 
 	graph.FillAdjMatrix();
 	graph.printNodes();
-	graph.SolveMaze();
+	graph.AStarTest();
 	vector<Vertex*> printList = graph.buildPath();
 	for (auto && print_list : printList)
 	{

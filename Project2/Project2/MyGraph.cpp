@@ -288,6 +288,7 @@ void MyGraph::AStarTest()
 	{
 		currentVertex = openList.back();
 		closedList.push_back(currentVertex);
+		//cout << currentVertex->xPos << currentVertex->yPos << " in closed list" << endl;
 		currentVertex->visited = true;
 
 		// For each neighbor of current
@@ -297,18 +298,22 @@ void MyGraph::AStarTest()
 			if (adjMatrix[currentVertex->index][i] == 1)
 			{
 				Vertex* possibleNeighbor = FindVertex(i);
+				
 				if(possibleNeighbor->visited == false)
 				{
 					neighborsList.push_back(possibleNeighbor);
+					openList.push_back(possibleNeighbor);
 					possibleNeighbor->visited = true;
 				}
 				
 			}
 		}
-
-		for(int i=0;i<sizeof(neighborsList);i++)
+		cout << "openList size " << openList.size() << endl;
+		cout << "closedList size " << closedList.size() << endl;
+		for(int i=0;i<neighborsList.size();i++)
 		{
 			Vertex* neighbor = neighborsList[i];
+			
 			int cost = currentVertex->heuristic + 1; // Cost = G(Current) + weight
 			bool inOpen = true;
 			bool inClosed = true;
@@ -328,13 +333,12 @@ void MyGraph::AStarTest()
 					inClosed = false;
 				}
 			}
-			if(!inOpen && !inClosed) 
-			{
+
 				neighbor->lowestCost = cost;
 				neighbor->previousVertex = currentVertex;
-			}
-		}
 
+		}
+		//std::cout << currentVertex->xPos << currentVertex->yPos << endl;
 	}
 }
 
