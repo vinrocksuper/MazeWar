@@ -278,6 +278,7 @@ void MyGraph::SolveMaze()
 void MyGraph::AStarTest()
 {
 	startVertex = FindVertex(startX, startY);
+	endVertex = FindVertex(endX, endY);
 	vector<Vertex*> openList; 
 	openList.push_back(startVertex); // q
 	vector<Vertex*> closedList;
