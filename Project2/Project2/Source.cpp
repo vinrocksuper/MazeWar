@@ -18,6 +18,7 @@ int currentStep = 0;
 bool mazeSet = false;
 bool init = false;
 MyGraph graph(startX, startY, endX, endY, mazeWidth, mazeHeight);
+vector<Vertex*> solvedPath;
 
 // Returns string of team members name
 __declspec(dllexport) char* GetTeam() {
@@ -70,16 +71,17 @@ __declspec(dllexport) int** GetMaze(int& width, int& height) {
 
 // returns next x/y pos to move to. 
 __declspec(dllexport) bool GetNextPosition(int& xpos, int& ypos) {
-
-
-
-
-
-	
-	if(xPath[currentStep] && yPath[currentStep])
+	if(solvedPath.empty())
 	{
-		xpos = xPath[currentStep];
-		ypos = yPath[currentStep];
+		graph.AStarTest();
+		solvedPath = graph.buildPath();
+		currentStep = 0;
+	}
+	
+	if(solvedPath[currentStep])
+	{
+		xpos = solvedPath[currentStep]->xPos;
+		ypos = solvedPath[currentStep]->yPos;
 		currentStep++;
 		return true;
 	}
