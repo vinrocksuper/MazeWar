@@ -123,6 +123,17 @@ void MyGraph::FillAdjMatrix()
 			{
 				continue;
 			}
+			if(vertices[i]->xPos == vertices[j]->xPos && abs(vertices[i]->yPos-vertices[j]->yPos) == 1)
+			{
+				adjMatrix[i][j] = AddEdge(vertices.at(i), vertices.at(j));
+			}
+			if (vertices[i]->yPos == vertices[j]->yPos && abs(vertices[i]->xPos - vertices[j]->xPos) == 1)
+			{
+				adjMatrix[i][j] = AddEdge(vertices.at(i), vertices.at(j));
+			}
+			/**
+			
+
 			if (i - width >= 0) // Any adj vertex above
 			{
 				adjMatrix[i][i-width] = AddEdge(vertices.at(i), vertices.at(i - width));
@@ -140,7 +151,8 @@ void MyGraph::FillAdjMatrix()
 			{
 				adjMatrix[i][i + 1] = AddEdge(vertices.at(i), vertices.at(i +1));
 			}
-			
+			 * 
+			 */
 		}
 
 		
@@ -151,6 +163,10 @@ void MyGraph::FillAdjMatrix()
 // Adds edges between the two vertexes if they are adjacent and not walls.
 int MyGraph::AddEdge(Vertex* vert1, Vertex* vert2)
 {
+
+
+
+	
 	if(vert1->isWall || vert2->isWall)
 	{
 		return 0; // if either are a wall, return no edges
