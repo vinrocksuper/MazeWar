@@ -27,43 +27,7 @@ MyGraph::MyGraph(int sX, int sY, int eX, int eY, int w, int h)
 		{
 			adjMatrix[i][j] = 0;
 		}
-	}
-	/**
-	 * 
-	 *
-	if(maze != nullptr)
-	{
-		// add nodes to graph
-
-		for (size_t i = 0; i < width; i++)
-		{
-			for (size_t j = 0; j < height; j++)
-			{
-				if (maze[i][j] != 1)
-				{
-					Vertex* node = new Vertex(); // Possible memory leak? (if new -> then delete is necessary)
-					node->xPos = i;
-					node->yPos = j;
-					node->heuristic = abs((int)(endX - i)) + abs((int)(endY - j));
-					node->visited = false;
-					if (maze[i][j] == 0)
-						node->weight = 1;
-					else
-						node->weight = maze[i][j];
-					node->lowestCost = INT_MAX;
-					node->index = vertexCount;
-					node->open = true;
-					vertexCount++;
-					vertices.push_back(node); // Vertices should only have non-walls
-					
-				}
-			}
-		}
-		
-	}
-	*/
-
-	
+	}	
 }
 
 // On moving into new vertex push it to stack. Mark it as visited.
@@ -74,7 +38,6 @@ void MyGraph::AddVertex(Vertex* vert)
 	vert->visited = false;
 	vert->index = vertexCount;
 	vert->open = true;
-	vertStack.push(vert);
 	vertices.push_back(vert);
 	
 	vertexCount++;
@@ -84,7 +47,7 @@ void MyGraph::AddVertex(Vertex* vert)
 // FINISHED
 void MyGraph::AssignHeuristic(Vertex* vert)
 {
-	vert->heuristic = (endX - vert->xPos) + (endY - vert->yPos);
+	vert->heuristic = abs(endX - vert->xPos) + abs(endY - vert->yPos);
 }
 
 // If no adj unvisited vertex, pop it from stack
@@ -285,25 +248,30 @@ void MyGraph::AStarTest()
 	openList.push_back(startVertex); // q
 	vector<Vertex*> closedList;
 
-	while(openList.back() != endVertex)
+	while(!openList.empty())
 	{
-		currentVertex = openList.back();
-		bool closedAdd = true;
-		for(int i=0;i<closedList.size();i++)
+		int lowest = INT_MAX;
+		int index= -1;
+		//Find index w/ least f value (heuristic + lowestCost)
+		for(int i=0;i<openList.size();i++)
 		{
-			if(closedList[i] == currentVertex)
+			if (openList[i]->heuristic < lowest)
 			{
-				closedAdd = false;
+				lowest = openList[i]->heuristic;
+				index = i;
+				currentVertex = openList[i];
 			}
 		}
-		if(closedAdd)
-		{
-			closedList.push_back(currentVertex);
-		}
-		
-		cout << currentVertex->xPos << currentVertex->yPos << endl;
-		currentVertex->visited = true;
 
+		
+		openList.erase(openList.begin() + index); // Remove it from openlist
+														// double check index >= 0
+		closedList.push_back(currentVertex);
+		currentVertex->visited = true;
+		if(currentVertex == endVertex)
+		{
+			return;
+		}
 		// For each neighbor of current
 		vector<Vertex*> neighborsList;
 
@@ -311,52 +279,27 @@ void MyGraph::AStarTest()
 			if (adjMatrix[currentVertex->index][i] == 1)
 			{
 				Vertex* possibleNeighbor = FindVertex(i);
-				
-				if(possibleNeighbor->visited == false)
+				if(!possibleNeighbor->visited)
 				{
-					neighborsList.push_back(possibleNeighbor);
+					possibleNeighbor->previousVertex = currentVertex;
+					if (std::count(closedList.begin(), closedList.end(), possibleNeighbor))
+					{
+						continue;
+					}
+					possibleNeighbor->lowestCost = 1 + possibleNeighbor->heuristic;
+
+					if (std::count(openList.begin(), openList.end(), possibleNeighbor))
+					{
+						if (possibleNeighbor->lowestCost > currentVertex->lowestCost + 1)
+						{
+							continue;
+						}
+					}
 					openList.push_back(possibleNeighbor);
-					//possibleNeighbor->previousVertex = currentVertex;
-					possibleNeighbor->visited = true;
 				}
-				
+
 			}
 		}
-		//cout << "openList size " << openList.size() << endl;
-		cout << "closedList size " << closedList.size() << endl;
-		for(int i=0;i<neighborsList.size();i++)
-		{
-			Vertex* neighbor = neighborsList[i];
-			
-			int cost = currentVertex->heuristic + 1; // Cost = G(Current) + weight
-			bool inOpen = true;
-			bool inClosed = true;
-			for(int i=0;i<openList.size();i++)
-			{
-				if(openList[i] == neighbor && neighbor->heuristic <  cost)
-				{
-					openList.erase(openList.begin()+i); // removes from openList @pos i
-					inOpen = false;
-				}
-			}
-			
-
-			for(int i=0;i<closedList.size();i++)
-			{
-				if(closedList[i] == neighbor && closedList[i]->heuristic < cost)
-				{
-					closedList.erase(closedList.begin() + i); // removes from closedList @pos i
-					inClosed = false;
-				}
-			}
-
-			if(!inOpen && !inClosed) 
-			{
-				neighbor->lowestCost = cost;
-				neighbor->previousVertex = currentVertex;
-			}
-		}
-		//std::cout << currentVertex->xPos << currentVertex->yPos << endl;
 	}
 }
 
@@ -396,7 +339,7 @@ void MyGraph::printNodes()
 {
 	for (auto && vertex : vertices)
 	{
-		cout << vertex->xPos << ", " << vertex->yPos << ", heuristic " << vertex->heuristic << endl;
+		cout << vertex->xPos << ", " << vertex->yPos << ", heuristic " << vertex->heuristic << " index : " <<vertex->index << endl;
 	}
 }
 

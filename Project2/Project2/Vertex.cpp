@@ -7,7 +7,7 @@ Vertex::Vertex(int x, int y)
 	xPos = x;
 	yPos = y;
 	visited = false;
-	
+	previousVertex = nullptr;
 }
 
 Vertex::Vertex()
@@ -18,6 +18,6 @@ Vertex::~Vertex()
 {
 	if(previousVertex != nullptr)
 	{
-		delete previousVertex;
+		previousVertex = nullptr;
 	}
 }

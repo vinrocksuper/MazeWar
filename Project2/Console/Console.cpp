@@ -17,7 +17,7 @@ __declspec(dllimport) bool GetNextPosition(int& xpos, int& ypos);
 using namespace std;
 int main()
 {
-	MyGraph graph(0, 0, 1, 1, 3, 3);
+	MyGraph graph(1, 0, 2, 2, 3, 3);
 
 	graph.AddVertex(new Vertex(0, 0));
 	graph.AddVertex(new Vertex(0, 1));
@@ -32,6 +32,7 @@ int main()
 	graph.FillAdjMatrix();
 	graph.printNodes();
 	graph.AStarTest();
+	graph.printMatrix();
 	vector<Vertex*> printList = graph.buildPath();
 	for (auto && print_list : printList)
 	{
