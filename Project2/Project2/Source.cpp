@@ -50,9 +50,14 @@ __declspec(dllexport) bool SetMaze(const int** data, int width, int height) {
 	mazeHeight = height;
 	mazeSet = true;
 
-	//
-	// FUNCTION NEEDS TO CALL PATHFINDING ALGO
-	//
+	if (solvedPath.empty())
+	{
+		graph.SetStart(startX, startY);
+		graph.SetEnd(endX, endY);
+		graph.AStarTest();
+		solvedPath = graph.buildPath();
+		currentStep = 0;
+	}
 
 	
 	return mazeSet;
@@ -71,14 +76,7 @@ __declspec(dllexport) int** GetMaze(int& width, int& height) {
 
 // returns next x/y pos to move to. 
 __declspec(dllexport) bool GetNextPosition(int& xpos, int& ypos) {
-	if(solvedPath.empty())
-	{
-		graph.SetStart(startX, startY);
-		graph.SetEnd(endX, endY);
-		graph.AStarTest();
-		solvedPath = graph.buildPath();
-		currentStep = 0;
-	}
+
 	
 	if(solvedPath[currentStep])
 	{

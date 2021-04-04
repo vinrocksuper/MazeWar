@@ -17,6 +17,8 @@ __declspec(dllimport) bool GetNextPosition(int& xpos, int& ypos);
 using namespace std;
 int main()
 {
+	/**
+
 	MyGraph graph(1, 0, 2, 2, 3, 3);
 
 	graph.AddVertex(new Vertex(0, 0));
@@ -38,5 +40,21 @@ int main()
 	{
 		cout << print_list->xPos << "," << print_list->yPos << endl;
 	}
+		 *
+	 */
 
+	SetStart(0, 0);
+	SetEnd(2, 2);
+	const int** data = new const int* [4];
+	for(int i=0;i<4;i++)
+	{
+		data[i] = new int[3];
+	}
+	
+	cout << SetMaze(data, 4, 3) << endl;
+	
+	int x = int(0);
+	int y = 0;
+	cout << GetNextPosition(x,x) << endl;
+	//cout << GetNextPosition(0, 0) << endl;
 }
