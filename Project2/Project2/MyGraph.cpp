@@ -15,19 +15,31 @@ MyGraph::MyGraph(int sX, int sY, int eX, int eY, int w, int h)
 	currentVertex = nullptr;
 	vertexCount = 0;
 	
+
+}
+
+void MyGraph::SetDimensions(int w, int h)
+{
+	width = w;
+	height = h;
+}
+
+void MyGraph::setupMatrix()
+{
 	//Sets up adjMatrix
-	adjMatrix = new int* [width*height];
-	for (int i = 0; i < width*height; i++)
+	adjMatrix = new int* [width * height];
+	for (int i = 0; i < width * height; i++)
 	{
-		adjMatrix[i] = new int[height*width];
+		adjMatrix[i] = new int[height * width];
 	}
-	for(int i=0;i<width*height;i++)
+	for (int i = 0; i < width * height; i++)
 	{
-		for(int j=0;j<width*height;j++)
+		for (int j = 0; j < width * height; j++)
 		{
 			adjMatrix[i][j] = 0;
 		}
-	}	
+	}
+	FillAdjMatrix();
 }
 
 // On moving into new vertex push it to stack. Mark it as visited.
@@ -49,6 +61,7 @@ void MyGraph::AssignHeuristic(Vertex* vert)
 {
 	vert->heuristic = abs(endX - vert->xPos) + abs(endY - vert->yPos);
 }
+/**
 
 // If no adj unvisited vertex, pop it from stack
 // Else push adjacent vertex into stack
@@ -76,7 +89,8 @@ void MyGraph::RemoveVertex()
 		vertStack.pop();
 	}
 }
-
+ *
+ */
 
 
 Vertex* MyGraph::FindVertex(int idx)

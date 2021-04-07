@@ -64,8 +64,9 @@ public:
 
 	void SetStart(int x, int y);
 	void SetEnd(int x, int y);
-	
+	void SetDimensions(int w, int h);
 	void printNodes();
 	void printMatrix();
 	vector<Vertex*> buildPath();
+	void setupMatrix();
 };

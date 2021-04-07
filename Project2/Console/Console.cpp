@@ -13,7 +13,7 @@ __declspec(dllimport) bool GetEnd(int& xpos, int& ypos);
 __declspec(dllimport) int** GetMaze(int& width, int& height);
 __declspec(dllimport) bool SetMaze(const int** data, int width, int height);
 __declspec(dllimport) bool GetNextPosition(int& xpos, int& ypos);
-
+__declspec(dllimport) void PrintMatrix();
 using namespace std;
 int main()
 {
@@ -42,19 +42,34 @@ int main()
 	}
 		 *
 	 */
+	/**
+	 * 
+	 */
 
-	SetStart(0, 0);
-	SetEnd(2, 2);
-	const int** data = new const int* [4];
+	int** data = new int* [4];
 	for(int i=0;i<4;i++)
 	{
 		data[i] = new int[3];
 	}
+	for(int i=0;i<4;i++)
+	{
+		for(int j=0;j<3;j++)
+		{
+			data[i][j] =  1;
+		}
+	}
+	data[2][1] = 0;
+	data[1][1] = 0;
+	data[0][1] = 0;
+	SetMaze((const int**) data, 4, 3);
+	SetStart(0, 0);
+	SetEnd(2, 2);
+	int x = int(5);
+	int y = 5;
+	while(GetNextPosition(x,y))
+	{
+		cout << x << y << endl;
+	}
 	
-	cout << SetMaze(data, 4, 3) << endl;
-	
-	int x = int(0);
-	int y = 0;
-	cout << GetNextPosition(x,x) << endl;
 	//cout << GetNextPosition(0, 0) << endl;
 }

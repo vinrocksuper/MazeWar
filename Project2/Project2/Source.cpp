@@ -43,21 +43,19 @@ __declspec(dllexport) bool SetMaze(const int** data, int width, int height) {
 		for (size_t j = 0; j < height; j++)
 		{
 			pMazeData[i][j] = (int)data[i][j];
-			graph.AddVertex(new Vertex(i, j));
+			if((int)data[i][j] >0)
+			{
+				graph.AddVertex(new Vertex(i, j));
+			}
+			
 		}
 	}
 	mazeWidth = width;
 	mazeHeight = height;
+	graph.SetDimensions(width, height);
 	mazeSet = true;
+	graph.setupMatrix();
 
-	if (solvedPath.empty())
-	{
-		graph.SetStart(startX, startY);
-		graph.SetEnd(endX, endY);
-		graph.AStarTest();
-		solvedPath = graph.buildPath();
-		currentStep = 0;
-	}
 
 	
 	return mazeSet;
@@ -76,13 +74,21 @@ __declspec(dllexport) int** GetMaze(int& width, int& height) {
 
 // returns next x/y pos to move to. 
 __declspec(dllexport) bool GetNextPosition(int& xpos, int& ypos) {
+	if (solvedPath.empty())
+	{
 
+		graph.SetStart(startX, startY);
+		graph.SetEnd(endX, endY);
+		graph.AStarTest();
+		solvedPath = graph.buildPath();
+		currentStep = solvedPath.size()-1;
+	}
 	
 	if(solvedPath[currentStep])
 	{
 		xpos = solvedPath[currentStep]->xPos;
 		ypos = solvedPath[currentStep]->yPos;
-		currentStep++;
+		currentStep--;
 		return true;
 	}
 	return false;
@@ -96,6 +102,7 @@ __declspec(dllexport) bool SetStart(int xpos, int ypos) {
 	}
 	startX = xpos;
 	startY = ypos;
+	graph.SetStart(startX, startY);
 	startSet = true;
 	return true;
 }
@@ -120,6 +127,7 @@ __declspec(dllexport) bool SetEnd(int xpos, int ypos) {
 	}
 	endX = xpos;
 	endY = ypos;
+	graph.SetEnd(startX, startY);
 	endSet = true;
 	return true;
 }
@@ -153,4 +161,9 @@ __declspec(dllexport) int AddEdge()
 		return 0;
 	}
 	return 1;
+}
+
+__declspec(dllexport) void PrintMatrix()
+{
+	graph.printMatrix();
 }
