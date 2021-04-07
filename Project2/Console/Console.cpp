@@ -107,7 +107,6 @@ int main()
 		}
 		cout << endl;
 	}
-	
 	SetMaze((const int**) data, 5, 5);
 	SetStart(0, 1);
 	SetEnd(4, 3);
@@ -115,7 +114,6 @@ int main()
 	int y = 5;
 	while(GetNextPosition(x, y))
 	{
-		
 		cout << x << y << endl;
 	}
 	
