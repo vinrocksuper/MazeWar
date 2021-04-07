@@ -59,6 +59,32 @@ int main()
 		}
 	}
 
+	//Test case 1 in DLL
+	/**
+
+	for (int i = 0; i < 5; i++)
+	{
+		for (int j = 0; j < 5; j++)
+		{
+			cout << data[i][j];
+		}
+		cout << endl;
+	}
+
+	SetMaze((const int**)data, 5, 5);
+	SetStart(0, 0);
+	SetEnd(4, 3);
+	int x = int(5);
+	int y = 5;
+	while (GetNextPosition(x, y))
+	{
+
+		cout << x << y << endl;
+	}
+		 * 
+	 */
+
+
 	//Test case 2 in DLL
 	data[0][0] = 0;
 	data[4][0] = 0;
@@ -92,5 +118,5 @@ int main()
 		
 		cout << x << y << endl;
 	}
-	//cout << GetNextPosition(0, 0) << endl;
+	
 }

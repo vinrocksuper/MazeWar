@@ -46,7 +46,7 @@ void MyGraph::setupMatrix()
 // UNFINISHED?
 void MyGraph::AddVertex(Vertex* vert)
 {
-	AssignHeuristic(vert);
+	
 	vert->visited = false;
 	vert->index = vertexCount;
 	vert->open = true;

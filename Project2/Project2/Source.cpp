@@ -76,9 +76,13 @@ __declspec(dllexport) int** GetMaze(int& width, int& height) {
 __declspec(dllexport) bool GetNextPosition(int& xpos, int& ypos) {
 	if (solvedPath.empty())
 	{
-
 		graph.SetStart(startX, startY);
 		graph.SetEnd(endX, endY);
+		for (auto&& v : graph.vertices)
+		{
+			graph.AssignHeuristic(v);
+		}
+		graph.printNodes();
 		graph.AStarTest();
 		solvedPath = graph.buildPath();
 		currentStep = solvedPath.size()-1;
