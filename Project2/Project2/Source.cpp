@@ -83,7 +83,10 @@ __declspec(dllexport) bool GetNextPosition(int& xpos, int& ypos) {
 		solvedPath = graph.buildPath();
 		currentStep = solvedPath.size()-1;
 	}
-	
+	if(currentStep > solvedPath.size())
+	{
+		return false;
+	}
 	if(solvedPath[currentStep])
 	{
 		xpos = solvedPath[currentStep]->xPos;

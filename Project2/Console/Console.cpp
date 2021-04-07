@@ -46,30 +46,51 @@ int main()
 	 * 
 	 */
 
-	int** data = new int* [4];
-	for(int i=0;i<4;i++)
+	int** data = new int* [5];
+	for(int i=0;i<5;i++)
 	{
-		data[i] = new int[3];
+		data[i] = new int[5];
 	}
-	for(int i=0;i<4;i++)
+	for(int i=0;i<5;i++)
 	{
-		for(int j=0;j<3;j++)
+		for(int j=0;j<5;j++)
 		{
 			data[i][j] =  1;
 		}
 	}
+
+	//Test case 2 in DLL
+	data[0][0] = 0;
+	data[4][0] = 0;
 	data[2][1] = 0;
-	data[1][1] = 0;
-	data[0][1] = 0;
-	SetMaze((const int**) data, 4, 3);
-	SetStart(0, 0);
-	SetEnd(2, 2);
-	int x = int(5);
-	int y = 5;
-	while(GetNextPosition(x,y))
+	data[4][1] = 0;
+	data[0][2] = 0;
+	data[1][2] = 0;
+	data[4][2] = 0;
+	data[0][3] = 0;
+	data[1][3] = 0;
+	data[3][3] = 0;
+	data[0][4] = 0;
+	data[1][4] = 0;
+
+	for(int i=0;i<5;i++)
 	{
-		cout << x << y << endl;
+		for(int j=0;j<5;j++)
+		{
+			cout << data[i][j];
+		}
+		cout << endl;
 	}
 	
+	SetMaze((const int**) data, 5, 5);
+	SetStart(0, 1);
+	SetEnd(4, 3);
+	int x = int(5);
+	int y = 5;
+	while(GetNextPosition(x, y))
+	{
+		
+		cout << x << y << endl;
+	}
 	//cout << GetNextPosition(0, 0) << endl;
 }

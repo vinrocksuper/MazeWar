@@ -177,10 +177,6 @@ void MyGraph::FillAdjMatrix()
 // Adds edges between the two vertexes if they are adjacent and not walls.
 int MyGraph::AddEdge(Vertex* vert1, Vertex* vert2)
 {
-
-
-
-	
 	if(vert1->isWall || vert2->isWall)
 	{
 		return 0; // if either are a wall, return no edges
@@ -205,6 +201,7 @@ MyGraph::~MyGraph()
 	cout << "Graph class yeet" << endl;
 }
 
+/**
 
 void MyGraph::SolveMaze()
 {
@@ -266,6 +263,8 @@ void MyGraph::SolveMaze()
 		}
 	}
 }
+ *
+ */
 
 // Vincent Li's A-Star attempt. Feel free to comment out.
 // Possibly finished? Steve said looks MOSTLY right. Will need to figure out what that means?
