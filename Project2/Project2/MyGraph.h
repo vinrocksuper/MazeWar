@@ -60,7 +60,7 @@ public:
 	void SolveMaze();
 
 
-	void AStarTest();
+	void AStar();
 
 	void SetStart(int x, int y);
 	void SetEnd(int x, int y);
