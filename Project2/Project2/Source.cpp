@@ -150,7 +150,7 @@ __declspec(dllexport) bool GetEnd(int& xpos, int& ypos) {
 // Brings player back to their start location and run thru the maze again
 __declspec(dllexport) bool Restart()
 {
-	currentStep = 0;
+	currentStep = solvedPath.size() - 1;
 	return true;
 }
 
