@@ -6,6 +6,7 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 __declspec(dllimport) int AddEdge();
+__declspec(dllimport) bool GetNextPosition(int& xpos, int& ypos);
 
 __declspec(dllimport) MyGraph;
 __declspec(dllimport) Vertex;
@@ -111,17 +112,113 @@ namespace UnitTest2
 
 		TEST_METHOD(TestBuildPath)
 		{
+			MyGraph graph(0, 0, 1, 1, 3, 3);
+
+			graph.AddVertex(new Vertex(0, 0));
+			graph.AddVertex(new Vertex(0, 1));
+			graph.AddVertex(new Vertex(0, 2));
+			graph.AddVertex(new Vertex(1, 0));
+			graph.AddVertex(new Vertex(1, 1));
+			graph.AddVertex(new Vertex(1, 2));
+			graph.AddVertex(new Vertex(2, 0));
+			graph.AddVertex(new Vertex(2, 1));
+			graph.AddVertex(new Vertex(2, 2));
+
+			graph.FillAdjMatrix();
+
+			try
+			{
+				vector<Vertex*> path = graph.buildPath();
+			}
+			catch (const std::exception&)
+			{
+				Assert::Fail(L"Build path is not correct");
+			}
+
 
 		}
 
 		TEST_METHOD(TestGetNextPos)
 		{
+			int** pMazeData = new int* [3];
+			for (size_t i = 0; i < 3; i++)
+			{
+				pMazeData[i] = new int[3];
+			}
+			for (size_t i = 0; i < 3; i++)
+			{
+				for (size_t j = 0; j < 3; j++)
+				{
+					pMazeData[i][j] = 0;
+				}
+			}
 
+			//MyGraph graph(0, 0, 1, 1, 3, 3,pMazeData);
+			MyGraph graph(0, 0, 1, 1, 3, 3);
+
+			graph.AddVertex(new Vertex(0, 0));
+			graph.AddVertex(new Vertex(0, 1));
+			graph.AddVertex(new Vertex(0, 2));
+			graph.AddVertex(new Vertex(1, 0));
+			graph.AddVertex(new Vertex(1, 1));
+			graph.AddVertex(new Vertex(1, 2));
+			graph.AddVertex(new Vertex(2, 0));
+			graph.AddVertex(new Vertex(2, 1));
+			graph.AddVertex(new Vertex(2, 2));
+
+			graph.FillAdjMatrix();
+
+			vector<Vertex*> Path;
+			int xpos = 2;
+			int ypos = 1;
+
+			try
+			{
+				GetNextPosition(xpos, ypos);
+			}
+			catch (const std::exception&)
+			{
+				Assert::Fail(L"Get Next Pos is not correct");
+			}
 		}
 
-		TEST_METHOD(TestSolveMaze)
+		TEST_METHOD(TestAStar)
 		{
+			int** pMazeData = new int* [3];
+			for (size_t i = 0; i < 3; i++)
+			{
+				pMazeData[i] = new int[3];
+			}
+			for (size_t i = 0; i < 3; i++)
+			{
+				for (size_t j = 0; j < 3; j++)
+				{
+					pMazeData[i][j] = 0;
+				}
+			}
 
+			MyGraph graph(0, 0, 1, 1, 3, 3);
+
+			graph.AddVertex(new Vertex(0, 0));
+			graph.AddVertex(new Vertex(0, 1));
+			graph.AddVertex(new Vertex(0, 2));
+			graph.AddVertex(new Vertex(1, 0));
+			graph.AddVertex(new Vertex(1, 1));
+			graph.AddVertex(new Vertex(1, 2));
+			graph.AddVertex(new Vertex(2, 0));
+			graph.AddVertex(new Vertex(2, 1));
+			graph.AddVertex(new Vertex(2, 2));
+
+			graph.FillAdjMatrix();
+
+			try
+			{
+				graph.AStar();
+			}
+			catch (const std::exception&)
+			{
+				Assert::Fail(L"A star is not correct");
+			}
 		}
 	};
 
