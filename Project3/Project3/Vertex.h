@@ -20,6 +20,7 @@ public:
 	//Constructor
 	Vertex(int x, int y);
 	Vertex();
+	Vertex(int x, int y, int w);
 	~Vertex();
 	//Methods
 

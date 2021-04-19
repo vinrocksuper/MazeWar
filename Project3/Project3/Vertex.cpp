@@ -9,7 +9,14 @@ Vertex::Vertex(int x, int y)
 	visited = false;
 	previousVertex = nullptr;
 }
-
+Vertex::Vertex(int x, int y, int w)
+{
+	xPos = x;
+	yPos = y;
+	weight = w;
+	visited = false;
+	previousVertex = nullptr;
+}
 Vertex::Vertex()
 {
 }

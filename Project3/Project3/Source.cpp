@@ -45,7 +45,7 @@ extern "C" __declspec(dllexport) bool SetMaze(const int** data, int width, int h
 			pMazeData[i][j] = (int)data[i][j];
 			if((int)data[i][j] > 0)
 			{
-				graph.AddVertex(new Vertex(i, j));
+				graph.AddVertex(new Vertex(i, j, data[i][j]));
 			}
 			
 		}

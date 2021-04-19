@@ -55,7 +55,14 @@ void MyGraph::AddVertex(Vertex* vert)
 // FINISHED
 void MyGraph::AssignHeuristic(Vertex* vert)
 {
-	vert->heuristic = abs(endX - vert->xPos) + abs(endY - vert->yPos);
+	if(vert->weight > 1)
+	{
+		vert->heuristic = abs(endX - vert->xPos) + abs(endY - vert->yPos) + vert->weight;
+	}else
+	{
+		vert->heuristic = abs(endX - vert->xPos) + abs(endY - vert->yPos);
+	}
+	
 }
 
 
@@ -192,11 +199,11 @@ void MyGraph::AStar()
 					{
 						continue;
 					}
-					possibleNeighbor->lowestCost = 1 + possibleNeighbor->heuristic;
+					possibleNeighbor->lowestCost = possibleNeighbor->weight + possibleNeighbor->heuristic;
 
 					if (std::count(openList.begin(), openList.end(), possibleNeighbor))
 					{
-						if (possibleNeighbor->lowestCost > currentVertex->lowestCost + 1)
+						if (possibleNeighbor->lowestCost > currentVertex->lowestCost + possibleNeighbor->weight)
 						{
 							continue;
 						}
@@ -245,7 +252,11 @@ void MyGraph::printNodes()
 {
 	for (auto && vertex : vertices)
 	{
-		cout << vertex->xPos << ", " << vertex->yPos << ", heuristic " << vertex->heuristic << " index : " <<vertex->index << endl;
+		if(vertex->weight > 1)
+		{
+			cout << vertex->xPos << ", " << vertex->yPos << ", heuristic " << vertex->heuristic << " index : " << vertex->index << "weight: " << vertex->weight << endl;
+		}
+		
 	}
 }
 

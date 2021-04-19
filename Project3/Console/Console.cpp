@@ -2,18 +2,18 @@
 //
 
 #include <iostream>
-#include "../Project2/Vertex.h";
-#include "../Project2/MyGraph.h";
+#include "../Project3/Vertex.h";
+#include "../Project3/MyGraph.h";
 
-__declspec(dllimport) char* GetTeam();
-__declspec(dllimport) bool SetStart(int xpos, int ypos);
-__declspec(dllimport) bool SetEnd(int xpos, int ypos);
-__declspec(dllimport) bool GetStart(int& xpos, int& ypos);
-__declspec(dllimport) bool GetEnd(int& xpos, int& ypos);
-__declspec(dllimport) int** GetMaze(int& width, int& height);
-__declspec(dllimport) bool SetMaze(const int** data, int width, int height);
-__declspec(dllimport) bool GetNextPosition(int& xpos, int& ypos);
-__declspec(dllimport) void PrintMatrix();
+extern "C" __declspec(dllimport) char* GetTeam();
+extern "C" __declspec(dllimport) bool SetStart(int xpos, int ypos);
+extern "C" __declspec(dllimport) bool SetEnd(int xpos, int ypos);
+extern "C" __declspec(dllimport) bool GetStart(int& xpos, int& ypos);
+extern "C" __declspec(dllimport) bool GetEnd(int& xpos, int& ypos);
+extern "C" __declspec(dllimport) int** GetMaze(int& width, int& height);
+extern "C" __declspec(dllimport) bool SetMaze(const int** data, int width, int height);
+extern "C" __declspec(dllimport) bool GetNextPosition(int& xpos, int& ypos);
+extern "C" __declspec(dllimport) void PrintMatrix();
 using namespace std;
 int main()
 {
@@ -82,7 +82,7 @@ int main()
 		cout << x << y << endl;
 	}
 		 * 
-	 */
+
 
 
 	//Test case 2 in DLL
@@ -116,5 +116,5 @@ int main()
 	{
 		cout << x << y << endl;
 	}
-	
+		 */
 }
