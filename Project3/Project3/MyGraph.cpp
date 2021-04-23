@@ -208,8 +208,12 @@ void MyGraph::AStar()
 						{
 							continue;
 						}
+
+					}else
+					{
+						openList.push_back(possibleNeighbor);
 					}
-					openList.push_back(possibleNeighbor);
+					
 				}
 
 			}
