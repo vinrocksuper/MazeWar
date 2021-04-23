@@ -47,7 +47,9 @@ void MyGraph::AddVertex(Vertex* vert)
 	vert->visited = false;
 	vert->index = vertexCount;
 	vert->open = true;
+	vert->total = INT_MAX;
 	vertices.push_back(vert);
+	
 	vertexCount++;
 }
 
@@ -55,13 +57,10 @@ void MyGraph::AddVertex(Vertex* vert)
 // FINISHED
 void MyGraph::AssignHeuristic(Vertex* vert)
 {
-	if(vert->weight > 1)
-	{
-		vert->heuristic = abs(endX - vert->xPos) + abs(endY - vert->yPos) + vert->weight;
-	}else
-	{
+
+
 		vert->heuristic = abs(endX - vert->xPos) + abs(endY - vert->yPos);
-	}
+
 	
 }
 
@@ -157,6 +156,7 @@ void MyGraph::AStar()
 {
 	startVertex = FindVertex(startX, startY);
 	endVertex = FindVertex(endX, endY);
+	startVertex->total = 0;
 	vector<Vertex*> openList; 
 	openList.push_back(startVertex); // q
 	vector<Vertex*> closedList;
@@ -168,9 +168,9 @@ void MyGraph::AStar()
 		//Find index w/ least f value (heuristic + lowestCost)
 		for(int i=0;i<openList.size();i++)
 		{
-			if (openList[i]->heuristic < lowest)
+			if (openList[i]->total <=lowest)
 			{
-				lowest = openList[i]->heuristic;
+				lowest = openList[i]->total;
 				index = i;
 				currentVertex = openList[i];
 			}
@@ -199,11 +199,12 @@ void MyGraph::AStar()
 					{
 						continue;
 					}
-					possibleNeighbor->lowestCost = possibleNeighbor->weight + possibleNeighbor->heuristic;
+					possibleNeighbor->lowestCost = currentVertex->lowestCost + possibleNeighbor->weight;
+					possibleNeighbor->total = possibleNeighbor->lowestCost + possibleNeighbor->heuristic;
 
 					if (std::count(openList.begin(), openList.end(), possibleNeighbor))
 					{
-						if (possibleNeighbor->lowestCost > currentVertex->lowestCost + possibleNeighbor->weight)
+						if (possibleNeighbor->lowestCost > currentVertex->lowestCost)
 						{
 							continue;
 						}
@@ -252,10 +253,9 @@ void MyGraph::printNodes()
 {
 	for (auto && vertex : vertices)
 	{
-		if(vertex->weight > 1)
-		{
-			cout << vertex->xPos << ", " << vertex->yPos << ", heuristic " << vertex->heuristic << " index : " << vertex->index << "weight: " << vertex->weight << endl;
-		}
+		if(vertex->lowestCost > 0)
+		cout << vertex->xPos << ", " << vertex->yPos << ", heuristic " << vertex->heuristic << " index: " << vertex->index << "weight: " << vertex->weight << " LC: " << vertex->lowestCost << endl;
+
 		
 	}
 }
