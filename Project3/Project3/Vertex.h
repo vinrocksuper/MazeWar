@@ -15,8 +15,7 @@ public:
 	
 	int weight; // UNSURE IF NECESSARY
 	int lowestCost; // UNSURE IF NECESSARY
-
-	
+	int total;
 	//Constructor
 	Vertex(int x, int y);
 	Vertex();

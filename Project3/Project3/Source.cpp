@@ -82,8 +82,9 @@ extern "C" __declspec(dllexport) bool GetNextPosition(int& xpos, int& ypos) {
 		{
 			graph.AssignHeuristic(v);
 		}
-		graph.printNodes();
+
 		graph.AStar();
+		graph.printNodes();
 		solvedPath = graph.buildPath();
 		currentStep = solvedPath.size()-1;
 	}
